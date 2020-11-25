@@ -5,19 +5,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_on_surface_stroke"
+    android:background="#246265"
     tools:context=".LoginActivity">
 
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="229dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
+            android:layout_width="383dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
@@ -25,16 +29,22 @@
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:layout_weight="1"
+            android:contentDescription="TODO"
             app:srcCompat="@drawable/logo3" />
+
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2">
 
         <EditText
-            android:id="@+id/editTextTextPersonName4"
+            android:id="@+id/registo_utilizador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -42,17 +52,16 @@
             android:layout_marginTop="300dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:background="@drawable/fundo_caixa_texto"
             android:ems="10"
-            android:hint="Digite o seu nome"
             android:gravity="center"
+            android:hint="Digite o seu nome"
             android:inputType="textPersonName"
             android:padding="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
 
         <EditText
-            android:id="@+id/editTextTextPassword4"
+            android:id="@+id/Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -60,10 +69,9 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:background="@drawable/fundo_caixa_texto"
             android:ems="10"
             android:gravity="center"
-            android:hint="Digite o sua senha"
+            android:hint="Digite a sua senha"
             android:inputType="textPassword"
             android:padding="16dp"
             android:textColor="@color/black"
@@ -78,24 +86,24 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:background="@drawable/fundo_botao"
             android:onClick="abrirInserirGastos"
             android:text="Login"
-            app:backgroundTint="@android:color/holo_blue_dark" />
+            app:backgroundTint="#03A9F4" />
 
         <TextView
-            android:id="@+id/tvResgistar"
+            android:id="@+id/tvRegistar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginLeft="48dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="48dp"
-            android:layout_marginRight="48dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
             android:gravity="center"
             android:onClick="abrirRegistarUtilizador"
-            android:text="Caso não tenha uma conta,crie uma."
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:text="Caso não tenha uma conta,registe-se."
+            android:textColorHighlight="@color/black"
+            android:textColorHint="#FFFFFF" />
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
