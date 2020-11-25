@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".RegistarUtilizadorActivity"
+    android:background="#246265">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_utilizador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            app:srcCompat="@drawable/utilizador"
+            android:contentDescription="@string/iv_image" />
+
+            <EditText
+                android:id="@+id/edit_registar_nome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:ems="10"
+                android:hint="Digite o nome"
+                android:inputType="textPersonName"
+                android:textColor="@color/white"
+                android:textColorHint="@color/black"
+                android:textSize="16sp"
+                android:autofillHints="" />
+
+           <EditText
+                android:id="@+id/edit_registar_sobrenome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:ems="10"
+                android:hint="Digite o Sobrenome"
+                android:inputType="textPersonName"
+                android:textColor="@color/white"
+                android:textColorHint="@color/black"
+                android:textSize="16sp"
+               android:autofillHints=""/>
+
+        <EditText
+            android:id="@+id/edit_registar_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:hint="Digite a sua senha"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
+            android:ems="10"
+            android:textColor="@color/white"
+            android:inputType="textPassword"
+            android:importantForAutofill="no"
+            android:autofillHints=""/>
+        <EditText
+            android:id="@+id/edit_registar_idade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:ems="10"
+            android:hint="Digite a sua idade"
+            android:inputType="number"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/black"
+            android:autofillHints="" />
+        <EditText
+            android:id="@+id/edit_registar_profissao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:ems="10"
+            android:textSize="16sp"
+            android:hint="Digite a sua profissão"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/black"
+            android:textColor="@color/white"
+            android:autofillHints=""/>
+        <EditText
+            android:id="@+id/edit_registar_estadoCivil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:ems="10"
+            android:textSize="16sp"
+            android:inputType="textPersonName"
+            android:text="Digite o seu estado civil"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+           />
+        <EditText
+            android:id="@+id/edit_registar_morada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:ems="10"
+            android:textSize="16sp"
+            android:hint="@string/digite_a_sua_morada"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:autofillHints="" />
+        <EditText
+            android:id="@+id/edit_registar_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:ems="10"
+            android:textSize="16sp"
+            android:hint="Digite o seu e-mail"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:autofillHints="" />
+        <EditText
+            android:id="@+id/edit_registar_contacto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:ems="10"
+            android:textSize="16sp"
+            android:hint="Digite o seu contato"
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:autofillHints="" />
+        <EditText
+            android:id="@+id/edit_registar_dataCriacao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:ems="10"
+            android:hint="@string/data_criacao"
+            android:inputType="date"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
+            android:autofillHints="" />
+
+        <Switch
+            android:id="@+id/switchFilhos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="@string/você_tem_filho"
+            android:textSize="14sp"
+            android:textColor="@color/black"/>
+        <Button
+            android:id="@+id/btn_proximo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:onClick="abrirRegistarUtilizador2"
+            android:text="Registar"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
+            android:backgroundTint="#3498DB"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
