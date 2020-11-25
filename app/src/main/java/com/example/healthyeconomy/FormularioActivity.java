@@ -6,17 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class RegistarActivity extends AppCompatActivity {
+public class FormularioActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registar);
+        setContentView(R.layout.activity_formulario);
     }
-
-    public void abrirRegistarUtilizador2( View view){
-        Intent intent = new Intent(RegistarActivity.this,ResgistarActivity2.class);
+    public void abrirCategorias(View view){
+        Intent intent = new Intent(FormularioActivity.this, CategoriasActivity.class);
         startActivity(intent);
-
     }
 }

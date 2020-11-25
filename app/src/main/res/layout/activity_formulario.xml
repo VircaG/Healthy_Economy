@@ -5,37 +5,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistarActivity"
-    android:background="@color/white">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+    tools:context=".FormularioActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="134dp">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <TextView
+            android:id="@+id/tvPergunta1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="Indique duas categorias que gasta mais o seu dinheiro?"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvCategorias"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            app:srcCompat="@drawable/utilizador" />
+            android:drawableLeft="@drawable/ic_seta_baixo_24dp"
+            android:gravity="center"
+            android:onClick="abrirCategorias"
+            android:text="Selecione as categorias"
+            android:textSize="16sp" />
+
+        <ListView
+            android:id="@+id/ListCategorias"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp" />
+
+        <TextView
+            android:id="@+id/tvPergunta2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="Qual é a sua maior dificuldade em fazer poupaça?"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/editTextTextPersonName9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -44,12 +77,22 @@
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:ems="10"
-            android:hint="Digite o nome"
             android:inputType="textPersonName"
-            android:padding="16dp"
+            android:hint="Escreve aqui" />
+
+        <TextView
+            android:id="@+id/tvPergunta3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="Qual o montante do dinheiro de reserva?"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textSize="16dp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextNumber"
@@ -57,67 +100,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:ems="10"
-            android:hint="Digite a sua idade"
-            android:inputType="number"
-            android:padding="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black" />
-
-        <EditText
-            android:id="@+id/editTextTextPersonName2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:ems="10"
-            android:hint="Digite a sua profissão"
-            android:inputType="textPersonName"
-            android:padding="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:hint="Digite o seu estado civil"
-            android:padding="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textSize="16dp" />
-
-        <EditText
-            android:id="@+id/editTextNumber2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:ems="10"
-            android:hint="Digite o seu contato"
-            android:inputType="number"
-            android:padding="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black" />
-
+            android:inputType="number" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btnEnviar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="Enviar" />
+
+        <Button
+            android:id="@+id/button8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -125,12 +126,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:onClick="abrirRegistarUtilizador2"
-            android:text="Próximo"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textSize="10dp" />
+            android:text="Vizualizar" />
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
