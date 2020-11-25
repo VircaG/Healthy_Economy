@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Healthy Economy</string>
+    <string name="abrirRegistarUtilizador">Registo</string>
+    <string name="digite_a_sua_morada">Digite a sua morada</string>
+    <string name="data_criacao">Digite a data de criação</string>
+    <string name="você_tem_filho">Você tem filho?</string>
+    <string name="iv_image">Imagem</string>
 </resources>
