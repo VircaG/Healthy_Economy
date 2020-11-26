@@ -13,6 +13,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class RegistarUtilizadorActivity extends AppCompatActivity {
@@ -85,9 +88,27 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
                     utilizador.setId(utilizadorFirebase.getUid());
                     utilizador.salvar();
 
+                    autenticacao.signOut();
+                    finish();
+
 
                 }else {
-                    Toast.makeText(RegistarUtilizadorActivity.this,"Insucesso ao registar utilizador : ", Toast.LENGTH_LONG).show();
+
+                    String erroExcecao = "";
+
+                    try{
+                        throw task.getException();
+                    } catch (FirebaseAuthWeakPasswordException e) {
+                        erroExcecao = "Digita uma senha mais fort,contendo mais caracteres e com letras e números!";
+                    }catch (FirebaseAuthInvalidCredentialsException e) {
+                        erroExcecao = "O e-mail digitado é inválido, digita um novo e-mail!";
+                    } catch (FirebaseAuthUserCollisionException e) {
+                        erroExcecao = "Esse e-mail já está em uso no App!";
+                    }catch (Exception e){
+                        erroExcecao = "Ao registar utilizador";
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(RegistarUtilizadorActivity.this,"Erro : " + erroExcecao ,Toast.LENGTH_LONG).show();
 
 
                 }
