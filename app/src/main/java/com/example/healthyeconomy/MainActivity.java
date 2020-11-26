@@ -16,19 +16,5 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-        /*
-        Utilizador utilizador = new Utilizador();
-        utilizador.setNome("Virca");
-        utilizador.setSobrenome("Afonso");
-        utilizador.setEmail("vircag@outlook.pt");
-        utilizador.setEstadoCivil("solteira");
-        utilizador.setFilhos(false);
-        utilizador.setIdade(24);
-        utilizador.setMorada("Rua miguel torga 2º direito");
-        utilizador.setNumTelefone("927763881");
-*/
     }
 }
