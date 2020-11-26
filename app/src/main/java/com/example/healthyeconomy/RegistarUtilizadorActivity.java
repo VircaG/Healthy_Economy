@@ -3,7 +3,6 @@ package com.example.healthyeconomy;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,16 +13,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegistarUtilizadorActivity extends AppCompatActivity {
     private EditText nome;
     private EditText sobrenome;
     private EditText senha;
     private EditText idade;
-    private EditText profissão;
+    private EditText profissao;
     private EditText estadoCivil;
-    private Button botaoProximo;
-    private Utilizador utilizador;
+    private EditText morada;
+    private EditText email;
+    private EditText contato;
+    private EditText data_criacao;
+    private boolean filho;
+    private Button botaoRegistar;
+    private  Utilizador utilizador;
     private FirebaseAuth autenticacao;
 
     @Override
@@ -36,20 +41,28 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
         sobrenome =(EditText) findViewById(R.id.edit_registar_sobrenome);
         senha =(EditText) findViewById(R.id.edit_registar_senha);
         idade =(EditText) findViewById(R.id.edit_registar_idade);
-        profissão =(EditText) findViewById(R.id.edit_registar_profissao);
-        estadoCivil =(EditText) findViewById(R.id.edit_registar_estadoCivil);
-        botaoProximo = (Button) findViewById(R.id.btn_proximo);
+        profissao =(EditText) findViewById(R.id.edit_registar_profissao);
+        estadoCivil= (EditText) findViewById(R.id.edit_registar_estadoCivil) ;
+        morada = (EditText) findViewById(R.id.edit_registar_morada);
+        email = (EditText) findViewById(R.id.edit_registar_email);
+        contato = (EditText) findViewById(R.id.edit_registar_contacto);
+        //filho = (boolean) findViewById(R.id.switchFilhos);
+        botaoRegistar = (Button)findViewById(R.id.btn_registar);
 
-        botaoProximo.setOnClickListener(new View.OnClickListener() {
+
+        botaoRegistar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 utilizador = new Utilizador();
                 utilizador.setNome(nome.getText().toString());
                 utilizador.setSobrenome(sobrenome.getText().toString());
                 utilizador.setSenha(senha.getText().toString());
-                utilizador.setProfissao(profissão.getText().toString());
-                utilizador.setProfissao(profissão.getText().toString());
+                utilizador.setIdade(idade.getText().length());
+                utilizador.setProfissao(profissao.getText().toString());
                 utilizador.setEstadoCivil(estadoCivil.getText().toString());
+                utilizador.setMorada(morada.getText().toString());
+                utilizador.setEmail(email.getText().toString());
+                utilizador.setContato(contato.getText().toString());
                 utilizador.setIdade(idade.getText().length());
                 registarUtilizador();
 
@@ -68,6 +81,11 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(RegistarUtilizadorActivity.this, "Sucesso ao registar utilizador", Toast.LENGTH_LONG).show();
+                    FirebaseUser utilizadorFirebase = task.getResult().getUser();
+                    utilizador.setId(utilizadorFirebase.getUid());
+                    utilizador.salvar();
+
+
                 }else {
                     Toast.makeText(RegistarUtilizadorActivity.this,"Insucesso ao registar utilizador : ", Toast.LENGTH_LONG).show();
 
