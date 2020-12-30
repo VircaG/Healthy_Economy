@@ -31,13 +31,13 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("Healthy Economy");
        // setSupportActionBar(toolbar);
     }
-/*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main);
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
-    */
+
 
 }
