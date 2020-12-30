@@ -84,6 +84,7 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(RegistarUtilizadorActivity.this, "Sucesso ao registar utilizador", Toast.LENGTH_LONG).show();
+
                     FirebaseUser utilizadorFirebase = task.getResult().getUser();
                     utilizador.setId(utilizadorFirebase.getUid());
                     utilizador.salvar();
