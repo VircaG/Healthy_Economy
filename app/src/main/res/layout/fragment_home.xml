@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#246265">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_despesas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="560dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:text="Despesas"
+        android:onClick="adicionarDespesas"/>
+
+        <Button
+            android:id="@+id/btn_LimiteMensal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:onClick="adicionarReceitas"
+            android:text="Limite Mensal" />
+
+    </LinearLayout>
+
+</RelativeLayout>
