@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 public class InserirGastosPorCategoriaActivity extends AppCompatActivity {
 
-    private static final String TAG = "InserirGastosPorCategoriaActivity";
+   // public static final String TAG = "InserirGastosPorCategoriaActivity";
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
@@ -26,9 +26,8 @@ public class InserirGastosPorCategoriaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inserir_gastos_por_categoria);
 
 
-        mDisplayDate = (TextView) findViewById(R.id.tvData);
-
-        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+        mDisplayDate = (TextView) findViewById(R.id.tvData2);
+        mDisplayDate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
@@ -50,13 +49,22 @@ public class InserirGastosPorCategoriaActivity extends AppCompatActivity {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
+                String mes;
                 month = month + 1;
-                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
+              //Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
 
-                String date = month + "/" + day + "/" + year;
+                if( month >= 1 && month<= 9){
+                    mes = ("0"+ month);
+
+                }else{ mes = (""+ month);
+
+                }
+                String date = day + "/" +mes+ "/" + year;
                 mDisplayDate.setText(date);
 
+
             }
+
         };
 
     }
