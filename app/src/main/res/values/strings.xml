@@ -7,4 +7,7 @@
     <string name="iv_image">Imagem</string>
     <string name="item_configuracoes">Configurações</string>
     <string name="item_sair">Sair</string>
+    <string name="navigation_drawer_open">Abrir desenho de navegação</string>
+    <string name="navigation_drawer_close">Fechar desenho de navegação</string>
+
 </resources>
