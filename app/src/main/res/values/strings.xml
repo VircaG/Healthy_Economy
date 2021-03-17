@@ -9,5 +9,47 @@
     <string name="item_sair">Sair</string>
     <string name="navigation_drawer_open">Abrir desenho de navegação</string>
     <string name="navigation_drawer_close">Fechar desenho de navegação</string>
+    <string name="descricao">Descrição</string>
+    <string name="adicione_a_descricao">Adicione a descrição</string>
+    <string name="selecione_a_data">Selecione a Data</string>
+    <string name="valor_gasto">Valor Gasto</string>
+    <string name="insira_o_valor">Insira o Valor</string>
+    <string name="data">Data</string>
+    <string name="inserir">Inserir</string>
+    <string name="visualizar">Visualizar</string>
+
+     <array name="Categorias">
+         <item>Alimentação</item>
+         <item>Bares e Restaurantes</item>
+         <item>Casa</item>
+         <item>Compras</item>
+         <item>Cuidados Pessoais</item>
+         <item>Educação</item>
+         <item>Família e Filhos</item>
+         <item>Lazer e hobbies</item>
+         <item>Mercado</item>
+         <item>Presentes</item>
+         <item>Pets</item>
+         <item>Transporte</item>
+         <item>Trabalho</item>
+         <item>Seguro</item>
+         <item>Viagem</item>
+     </array>
+
+    <array name="Mês">
+        <item>Janeiro</item>
+        <item>Fevereiro</item>
+        <item>Março</item>
+        <item>Abril</item>
+        <item>Maio</item>
+        <item>Junho</item>
+        <item>Agosto</item>
+        <item>Setembro</item>
+        <item>Outubro</item>
+        <item>Novembro</item>
+        <item>Dezembro</item>
+    </array>
+
+
 
 </resources>
