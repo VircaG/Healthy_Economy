@@ -9,9 +9,9 @@
             android:icon="@drawable/ic_home_24dp"
             android:title="Home" />
         <item
-            android:id="@+id/nav_messagem"
+            android:id="@+id/nav_contacto"
             android:icon="@drawable/ic_menssagem_24dp"
-            android:title="Messagem" />
+            android:title="Contacto" />
 
         <item
             android:id="@+id/nav_chat"

@@ -14,7 +14,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+//import com.google.firebase.database.DatabaseReference;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        verificarUtilizadorLogin();
 
         email = (EditText) findViewById(R.id.edit_login_email);
         senha = (EditText) findViewById(R.id.edit_login_senha);
@@ -38,16 +39,29 @@ public class LoginActivity extends AppCompatActivity {
         botaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                utilizador = new Utilizador();
+                String textoEmail = email.getText().toString();
+                String testoSenha = senha.getText().toString();
 
-                utilizador.setEmail(email.getText().toString());
-                utilizador.setSenha(senha.getText().toString());
-                validarLogin();
-
+                if( !textoEmail.isEmpty() ){
+                    if( !testoSenha.isEmpty() ){
+                        utilizador = new Utilizador();
+                        utilizador.setEmail( textoEmail );
+                        utilizador.setSenha(testoSenha );
+                        validarLogin();
+                        //autenticacao.signOut();
+                    }else{
+                         senha.setError("Insira a sua password!");
+                         senha.requestFocus();
+                    }
+                }else {
+                    email.setError("Insira o seu email!");
+                    email.requestFocus();
+                }
             }
         });
-
     }
+
+
 
     private void verificarUtilizadorLogin(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
@@ -67,14 +81,24 @@ public class LoginActivity extends AppCompatActivity {
               if(task.isSuccessful()){
                   abrirTelaPrincipal();
                   Toast.makeText(LoginActivity.this,"Sucesso ao fazer login", Toast.LENGTH_LONG).show();
-              } else {
-                  Toast.makeText(
-                          LoginActivity.this,"Erro ao fazer Login!",Toast.LENGTH_LONG).show();
-
-                }
+              }else {
+                  String exception = "";
+                  try {
+                      throw task.getException();
+                  }catch (FirebaseAuthInvalidUserException e) {
+                     // exception = getString(R.string.email);
+                  }catch (FirebaseAuthInvalidCredentialsException e){
+                      //exception = getString(R.string.noMatch);
+                  }catch (Exception e){
+                     // exception = getString(R.string.errorLogin) + e.getMessage();
+                      e.printStackTrace();
+                  }
+                  Toast.makeText(LoginActivity.this, exception, Toast.LENGTH_SHORT).show();
+              }
             }
         });
     }
+
 
 
     public void abrirTelaPrincipal(){

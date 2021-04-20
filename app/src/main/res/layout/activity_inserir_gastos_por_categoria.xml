@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#246265"
     tools:context=".InserirGastosPorCategoriaActivity">
 
     <LinearLayout
@@ -11,57 +12,146 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editTextTextPersonName7"
+        <Spinner
+            android:id="@+id/spinner_por_Categorias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="24dp"
+            android:padding="10dp"
+            android:textSize="28sp"
+            android:textAlignment="center"
+            android:entries="@array/Categorias"
+            android:background="@drawable/spinner_background"/>
+        <ImageView
+            android:id="@+id/Spinnercotumizacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_seta_baixo_circulo_preto__24dp"
+            android:layout_marginLeft="320dp"
+            android:layout_marginTop="-33dp" />
+
+
+        <TextView
+            android:id="@+id/tv_descricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adicione uma descrição"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/editText_descricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:ems="10"
+            android:textAlignment="center"
             android:hint="Adicione uma descrição"
-
             android:inputType="textPersonName"
             android:textColor="@color/black" />
-
+        <TextView
+            android:id="@+id/tv_limiteMensal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adicione o limite mensal da Categoria"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
         <EditText
-            android:id="@+id/editTextNumberDecimal3"
+            android:id="@+id/editText_valor_categoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:ems="10"
+            android:textAlignment="center"
             android:hint="Adicione o limite mensal"
             android:inputType="numberDecimal" />
 
+
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tv_data_categoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
+            android:textAlignment="center"
             android:hint="Selecione a data"
             android:textColor="@color/black"
             android:textSize="20sp"/>
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btn_inserir_gastos_categoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:text="Button" />
+            android:text="Inserir"
+            android:backgroundTint="#03A9F4"/>
 
+        <Button
+            android:id="@+id/btn_editar_gastos_categoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="Editar"
+            android:backgroundTint="#e6e600"/>
+        <Button
+            android:id="@+id/btn_visualizar_gastos_categoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="Visualizar"
+            android:backgroundTint="#ff0066"/>
+
+        <Button
+            android:id="@+id/btn_inicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="Voltar"
+            android:onClick="voltarAoInicio"
+            android:backgroundTint="#03A9F4"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

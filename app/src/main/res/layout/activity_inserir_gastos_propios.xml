@@ -3,39 +3,52 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/inserirData"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#246265"
+    android:gravity="center"
     tools:context=".InserirGastosPropiosActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="199dp"
-        tools:layout_editor_absoluteY="155dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+
+
+        <Spinner
+            android:id="@+id/spiner_Categorias"
             android:layout_width="match_parent"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="80dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:drawableLeft="@drawable/ic_seta_baixo_24dp"
-            android:gravity="center_horizontal"
-            android:onClick="selecionarCategoria"
-            android:paddingTop="10dp"
-            android:text="Selecione a Categoria"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:padding="10dp"
+            android:textSize="28sp"
+            android:textAlignment="center"
+            android:entries="@array/Categorias"
+            android:background="@drawable/spinner_background" />
+
+
+        <ImageView
+            android:id="@+id/Spinnercotumizacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+           android:layout_marginLeft="320dp"
+            android:layout_marginTop="-33dp"
+            android:src="@drawable/ic_seta_baixo_circulo_preto__24dp">
+
+        </ImageView>
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tv_decricacao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -44,13 +57,13 @@
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:gravity="center"
-            android:text="Descrição"
+            android:text="@string/descricao"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName5"
+            android:id="@+id/edit_regitar_decricao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -60,7 +73,7 @@
             android:layout_marginRight="24dp"
             android:ems="10"
             android:gravity="center"
-            android:hint="Adicione a descrição"
+            android:hint="@string/adicione_a_descricao"
             android:inputType="textPersonName"
             android:textColor="@color/white" />
 
@@ -74,13 +87,13 @@
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:gravity="center"
-            android:text="Valor Gasto"
-            android:textColor="@color/white"
+            android:text="@string/valor_gasto"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/editTextNumberDecimal2"
+            android:id="@+id/edit_registar_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -90,7 +103,7 @@
             android:layout_marginRight="24dp"
             android:ems="10"
             android:gravity="center"
-            android:hint="Insira o Valor"
+            android:hint="@string/insira_o_valor"
             android:inputType="numberDecimal"
             android:textColor="@color/white" />
 
@@ -104,13 +117,13 @@
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:gravity="center"
-            android:text="Data"
-            android:textColor="@color/white"
+            android:text="@string/data"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tvData"
+            android:id="@+id/tv_data_gasto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -118,14 +131,14 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:hint="Selecione a Data"
-            android:textSize="16sp"
             android:gravity="center"
-            android:textColor="@color/white"/>
+            android:hint="@string/selecione_a_data"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/btn_inserirGastos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -133,8 +146,38 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:text="Inserir"
+            android:text="@string/inserir"
             app:backgroundTint="#03A9F4" />
 
+        <Button
+            android:id="@+id/btn_visualizarGastos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="@string/visualizar"
+            app:backgroundTint="#e6e600" />
+
+
+        <Button
+            android:id="@+id/btn_gastos_por_categoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="Inserir por Categoria"
+            android:onClick="abrirGastosPorCategoria"
+            app:backgroundTint="#ff0000" />
+
+
     </LinearLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

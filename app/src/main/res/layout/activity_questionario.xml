@@ -5,70 +5,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FormularioActivity">
+    tools:context=".QuestionarioActivity"
+    android:background="#246265">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="143dp"
-        tools:layout_editor_absoluteY="134dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvPergunta1"
+            android:id="@+id/tv_Pergunta1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="80dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:text="Indique duas categorias que gasta mais o seu dinheiro?"
+            android:text="Escolha abaixo duas categorias que tens maior dificuldade em fazer gestão?"
+            android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvCategorias"
+
+        <Spinner
+            android:id="@+id/spinner_Quest"
             android:layout_width="match_parent"
-            android:layout_height="39dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:drawableLeft="@drawable/ic_seta_baixo_24dp"
             android:gravity="center"
-            android:onClick="abrirCategorias"
-            android:text="Selecione as categorias"
+            android:padding="10dp"
             android:textSize="16sp" />
 
-        <ListView
-            android:id="@+id/ListCategorias"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp" />
-
         <TextView
-            android:id="@+id/tvPergunta2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:text="Qual é a sua maior dificuldade em fazer poupaça?"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editTextTextPersonName9"
+            android:id="@+id/tv_quest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -76,12 +55,11 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Escreve aqui" />
+            android:hint="Categorias"
+            android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/tvPergunta3"
+            android:id="@+id/tv_Pergunta2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -90,43 +68,88 @@
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:text="Qual o montante do dinheiro de reserva?"
+            android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextNumber"
+            android:id="@+id/editText_resposta2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
-        <Button
-            android:id="@+id/btnEnviar"
+        <TextView
+            android:id="@+id/tv_Pergunta3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
+            android:text="Qual é a sua maior dificuldade em fazer poupaça?"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <EditText
+            android:id="@+id/editText_resposta3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:ems="10"
+            android:hint="Escreve aqui"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/btn_Enviar_Quest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:backgroundTint="#03A9F4"
             android:text="Enviar" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/btn_Visualizar_Quest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
+            android:backgroundTint="#ff0066"
             android:text="Vizualizar" />
+
+        <Button
+            android:id="@+id/btn_Editar_Quest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:backgroundTint="#e6e600"
+            android:text="Editar" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

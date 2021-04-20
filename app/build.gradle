@@ -49,8 +49,9 @@ dependencies {
 
 
     //Firebase
-    implementation 'com.google.firebase:firebase-database:19.6.0'
-    implementation 'com.google.firebase:firebase-auth:20.0.1'
+    implementation 'com.google.firebase:firebase-database:19.7.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.3'
+
 
 
 

@@ -11,95 +11,77 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="121dp"
-        tools:layout_editor_absoluteY="247dp">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="121dp">
+
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_valormensal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="200dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:drawableLeft="@drawable/ic_seta_baixo_24dp"
-            android:onClick="abrirCategorias"
-            android:text="Categorias"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:typeface="normal"
-            android:textColor="@color/black"/>
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:drawableLeft="@drawable/ic_lapis_50dp"
-            android:hint="Adicione a Descrição"
-            android:textColor="@color/black"/>
-
-        <EditText
-            android:id="@+id/editText_descricao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:ems="10"
-            android:textSize="15sp"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:textColor="@color/black"/>
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
+            android:textAlignment="center"
             android:text="Valor de Limite Mensal"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextNumberDecimal"
+            android:id="@+id/editText_valor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:drawableLeft="@drawable/ic_dinheiro_50dp"
+            android:drawableRight="@drawable/ic_euro_24dp"
             android:ems="10"
+            android:textAlignment="center"
             android:inputType="numberDecimal"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_inserirLimite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:text="Inserir"
             app:backgroundTint="#03A9F4" />
+
+        <Button
+            android:id="@+id/btn_visualizarLimite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="Visualizar"
+            app:backgroundTint="#e6e600" />
+
+        <Button
+            android:id="@+id/btn_inserir_despesas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:onClick="abrirInserirDespesas"
+            android:text="Inserir Despesas"
+            app:backgroundTint="#ff0066" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

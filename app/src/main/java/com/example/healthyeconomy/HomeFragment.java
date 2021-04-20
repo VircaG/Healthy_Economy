@@ -11,11 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 public class HomeFragment extends Fragment {
 
-    private Button  buttonLimite;
+    private Button  btnResponderQuest;
+    private Button  btnAddLimite;
    //FloatingActionButton floatingActionButton;
 
     @Nullable
@@ -26,25 +25,32 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home,
                 container,false);
 
-        buttonLimite = (Button) view.findViewById(R.id.btn_LimiteMensal);
+        btnResponderQuest = (Button) view.findViewById(R.id.btn_responder_quest);
+        btnAddLimite = (Button) view.findViewById(R.id.btn_Add_Limite);
 
-        buttonLimite.setOnClickListener(new View.OnClickListener() {
+
+        btnResponderQuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                Intent intent = new Intent(getActivity(),
-                       LimiteDeGastosActivity.class);
-               intent.putExtra("some","some data");
+                       QuestionarioActivity.class);
                startActivity(intent);
+            }
+        });
+
+
+        btnAddLimite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),
+                        LimiteDeGastosActivity.class);
+                startActivity(intent);
+
             }
         });
 
         return view;
 
-
     }
-
-
-
-
 
 }

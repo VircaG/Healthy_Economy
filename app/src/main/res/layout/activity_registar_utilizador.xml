@@ -132,10 +132,11 @@
             android:ems="10"
             android:hint="Digite a sua idade"
             android:inputType="number"
-            android:textSize="16sp"
+            android:padding="16dp"
             android:textColor="@color/white"
             android:textColorHint="@color/black"
-            android:padding="16dp"/>
+            android:textSize="16sp" />
+
         <EditText
             android:id="@+id/edit_registar_profissao"
             android:layout_width="match_parent"

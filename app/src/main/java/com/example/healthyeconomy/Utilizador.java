@@ -1,12 +1,14 @@
 package com.example.healthyeconomy;
 
+import android.util.Log;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthRegistrar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
 public class Utilizador {
-    private String id;
     private String Nome;
     private String sobrenome;
     private String senha;
@@ -17,24 +19,37 @@ public class Utilizador {
     private String email;
     private String morada;
     private boolean filho;
+    private String idUtilizador;
     private Button btnRegistar;
-
-    public void salvar(){
-        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        referenciaFirebase.child("utilizadores").child(getId()).setValue(this);
-    }
 
 
     public Utilizador() {
     }
 
-    public String getId() {
-        return id;
+    public void salvarUtilizador(){
+
+        FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        String identificadorUtilizador = Base64Custom.condificarBase64(autenticacao.getCurrentUser().getEmail());
+        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        Log.d("registo","referenciaFirebase: " + referenciaFirebase);
+        Log.d("registo","identificadorUtilizador: " + referenciaFirebase);
+
+       referenciaFirebase.child("Utilizadores")
+               .child(identificadorUtilizador)
+               .setValue(this);
+
+
     }
 
-    public void setId(String id) {
-        this.id = id;
+    //@Exclude
+    public String getIdUtilizador() {
+        return idUtilizador;
     }
+
+    public void setIdUtilizador(String idUtilizador) {
+        this.idUtilizador = idUtilizador;
+    }
+
 
     public String getNome() {
         return Nome;
@@ -52,6 +67,7 @@ public class Utilizador {
         this.sobrenome = sobrenome;
     }
 
+    //@Exclude
     public String getSenha() {
         return senha;
     }
