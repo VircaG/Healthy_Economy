@@ -5,6 +5,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthRegistrar;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
@@ -26,20 +27,33 @@ public class Utilizador {
     public Utilizador() {
     }
 
-    public void salvarUtilizador(){
+    public void salvarUtilizador() {
 
         FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+       // String identificadorUtilizador = "teste";
         String identificadorUtilizador = Base64Custom.condificarBase64(autenticacao.getCurrentUser().getEmail());
         DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        Log.d("registo","referenciaFirebase: " + referenciaFirebase);
-        Log.d("registo","identificadorUtilizador: " + referenciaFirebase);
+        Log.d("registo", "referenciaFirebase: " + referenciaFirebase);
+        Log.d("registo", "identificadorUtilizador: " + referenciaFirebase);
 
-       referenciaFirebase.child("Utilizadores")
-               .child(identificadorUtilizador)
-               .setValue(this);
+        referenciaFirebase.child("Utilizadores")
+                .child(identificadorUtilizador)
+                .setValue(this, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        if (databaseError != null) {
+                            //System.out.println("Data could not be saved " + databaseError.getMessage());
+                            Log.d("registo","Data could not be saved " + databaseError.getMessage());
 
+                        } else {
+                            //System.out.println("Data saved successfully.");
+                            Log.d("registo","Data saved successfully.");
+                        }
+                    }
+                });
 
     }
+
 
     //@Exclude
     public String getIdUtilizador() {
