@@ -67,7 +67,7 @@ public class QuestionarioActivity extends AppCompatActivity {
         resposta3 = (EditText)findViewById(R.id.editText_resposta3);
         botaoEnviarQuest= (Button) findViewById(R.id.btn_Enviar_Quest);
         botaoVisualizarQuest = (Button) findViewById(R.id.btn_Visualizar_Quest);
-        botaoEditarQuest = (Button) findViewById(R.id.btn_Editar_Quest);
+       // botaoEditarQuest = (Button) findViewById(R.id.btn_Editar_Quest);
 
         //Criar Adapter
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,

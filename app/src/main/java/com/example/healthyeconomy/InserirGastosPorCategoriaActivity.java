@@ -130,10 +130,5 @@ public class InserirGastosPorCategoriaActivity extends AppCompatActivity {
         });
     }
 
-    public void voltarAoInicio( View view){
-        Intent intent = new Intent(InserirGastosPorCategoriaActivity.this,HomeFragment.class);
-        //startActivity(intent);
-        finish();
 
-    }
 }

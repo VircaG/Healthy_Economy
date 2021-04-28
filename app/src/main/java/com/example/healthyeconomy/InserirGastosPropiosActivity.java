@@ -27,8 +27,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class InserirGastosPropiosActivity extends AppCompatActivity implements  AdapterView.OnItemSelectedListener {
-    private static final String TAG ="InserirGastosPropiosActivity";
+public class InserirGastosPropiosActivity extends AppCompatActivity implements  AdapterView.OnItemSelectedListener { private static final String TAG ="InserirGastosPropiosActivity";
   private TextView  mDisplayDate;
   private DatePickerDialog.OnDateSetListener mDateSetListener;
   private String id;

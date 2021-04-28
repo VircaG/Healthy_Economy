@@ -16,15 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QuestionarioActivity"/>
+        <activity android:name=".QuestionarioActivity" />
         <activity android:name=".RegistarUtilizadorActivity" />
         <activity android:name=".InserirGastosPropiosActivity" />
         <activity android:name=".InserirGastosPorCategoriaActivity" />
         <activity android:name=".LimiteDeGastosActivity" />
-        <activity android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:usesCleartextTraffic="true"/>
-
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".TelaPrincipalActivity"/>
     </application>
 
 </manifest>
