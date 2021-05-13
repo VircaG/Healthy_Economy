@@ -33,8 +33,6 @@ public class Utilizador {
        // String identificadorUtilizador = "teste";
         String identificadorUtilizador = Base64Custom.condificarBase64(autenticacao.getCurrentUser().getEmail());
         DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        Log.d("registo", "referenciaFirebase: " + referenciaFirebase);
-        Log.d("registo", "identificadorUtilizador: " + referenciaFirebase);
 
         referenciaFirebase.child("Utilizadores")
                 .child(identificadorUtilizador)

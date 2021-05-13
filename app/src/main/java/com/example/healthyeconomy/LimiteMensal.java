@@ -1,59 +1,64 @@
 package com.example.healthyeconomy;
 
 import android.widget.Button;
+import com.example.healthyeconomy.ConfiguracaoFirebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
-//import com.google.firebase.database.DatabaseReference;
+
 
 public class LimiteMensal {
 
-    private String id;
-    private String getId;
+    private String idLimite;
     private String mes;
-    private String valor;
+    private Integer valor;
     private Button inserirLimite;
     private Button alterarLimite;
     private Button visualizarLimite;
 
-    public void inserir(){
-        //DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        //referenciaFirebase.child("Limite Mensal").child(getId()).setValue(this);
-    }
 
-    public LimiteMensal(){
+    public  LimiteMensal(){
 
     }
+//    public LimiteMensal(){
+//        DatabaseReference reference = ConfiguracaoFirebase.getFirebase().child("limite mensal");
+//        setIdLimite(reference.push().getKey());
+//    }
+    public void guardar(){
+        FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        String idUtilizador = Base64Custom.condificarBase64(autenticacao.getCurrentUser().getEmail());
 
+        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        referenciaFirebase.child("limite mensal")
+                .child(idUtilizador)
+                .child(idLimite)
+                .setValue(this);
 
-    public String getId() {
-        return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+
+    public String getIdLimite() {
+        return idLimite;
     }
 
-    public String getGetId() {
-        return getId;
-    }
-
-    public void setGetId(String getId) {
-        this.getId = getId;
-    }
-
-    public String getValor() {
-        return valor;
+    public void setIdLimite(String idLimite) {
+        this.idLimite = idLimite;
     }
 
     public String getMes() {
         return mes;
     }
 
-    public void setMes(String mes) {
-        this.mes = mes;
+    public Integer getValor() {
+        return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(Integer valor) {
         this.valor = valor;
+    }
+
+    public void setMes(String mes) {
+        this.mes = mes;
     }
 
     public Button getInserirLimite() {

@@ -24,8 +24,8 @@
             android:layout_marginTop="200dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
+            android:text="Insira o valor do limite mensal"
             android:textAlignment="center"
-            android:text="Valor de Limite Mensal"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -47,7 +47,7 @@
             android:textColor="@color/black" />
 
         <Button
-            android:id="@+id/btn_inserirLimite"
+            android:id="@+id/btn_proximo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -55,33 +55,9 @@
             android:layout_marginTop="60dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:text="Inserir"
-            app:backgroundTint="#03A9F4" />
-
-        <Button
-            android:id="@+id/btn_visualizarLimite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:text="Visualizar"
-            app:backgroundTint="#e6e600" />
-
-        <Button
-            android:id="@+id/btn_inserir_despesas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
             android:onClick="abrirInserirDespesas"
-            android:text="Inserir Despesas"
-            app:backgroundTint="#ff0066" />
+            android:text="Próximo"
+            app:backgroundTint="#03A9F4" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
