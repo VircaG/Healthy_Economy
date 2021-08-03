@@ -15,7 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,12 +26,13 @@ import java.util.EventListener;
 
 public class LimiteDeGastosActivity extends AppCompatActivity implements EventListener {
     private EditText valorLimite;
-    private Button botaoProximo;
+    private Button btnSalvar;
+    private Button btn_InserirDespesas;
     private LimiteMensal limiteMensal;
     private FirebaseAuth autenticacao;
-    private Utilizador utilizador;
-    private  FirebaseDatabase database;
-    private  DatabaseReference reference;
+    private  Utilizador utilizador;
+    FirebaseDatabase database;
+    DatabaseReference reference;
     int maxid = 0;
 
     @Override
@@ -40,18 +41,18 @@ public class LimiteDeGastosActivity extends AppCompatActivity implements EventLi
         setContentView(R.layout.activity_limite_de_gastos);
 
         valorLimite = (EditText) findViewById(R.id.editText_valor);
-        botaoProximo = (Button) findViewById(R.id.btn_proximo);
+        btnSalvar = (Button) findViewById(R.id.btn_salvar);
+        btn_InserirDespesas = (Button) findViewById(R.id.btn_inserirDespesas);
 
-
+        limiteMensal = new LimiteMensal();
         reference = database.getInstance().getReference().child("Limite Mensal");
 
-
-
         reference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    maxid =(int) snapshot.getChildrenCount();
+                    maxid = (int)snapshot.getChildrenCount();
 
                 }
             }
@@ -62,52 +63,40 @@ public class LimiteDeGastosActivity extends AppCompatActivity implements EventLi
             }
         });
 
-        botaoProximo.setOnClickListener(new View.OnClickListener() {
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 limiteMensal = new LimiteMensal();
-                limiteMensal.setValor(valorLimite.getText().length());
-                registarLimite();
+                limiteMensal.setValorLimite(valorLimite.getText().toString());
+                //limiteMensal.setMes(spinerMes.getSelectedItem().toString());
 
 
                 Toast.makeText(LimiteDeGastosActivity.this,"Inserido com sucesso",Toast.LENGTH_LONG).show();
+                reference.child(String.valueOf(maxid + 1 )).setValue(limiteMensal);
+
 
             }
+
         });
 
+
     }
 
-    private void registarLimite(){
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+    public void guardar() {
+        FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        String identificadorUtilizador = Base64Custom.condificarBase64(utilizador.getEmail());
+        utilizador.setIdUtilizador(identificadorUtilizador);
+        utilizador.salvarUtilizador();
 
-       Task<AuthResult> authResultTask = autenticacao.createUserWithEmailAndPassword(
-               utilizador.getEmail(),utilizador.getSenha()
-       ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-           @Override
-           public void onComplete(@NonNull Task<AuthResult> task) {
+        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
 
-               if(task.isSuccessful()){
-                   String identificadorUtilizador = Base64Custom.condificarBase64(utilizador.getEmail());
-                   utilizador.setIdUtilizador(identificadorUtilizador);
-                   utilizador.salvarUtilizador();
-                   abrirTelaPrincipal();
 
-               } else {
-                   String erroExcecao = "";
-                   try {
-                       throw task.getException();
-                   } catch (FirebaseAuthWeakPasswordException e) {
-                       erroExcecao = "Digite um numero maior!";
-                   } catch (Exception e) {
-                       erroExcecao = "Ao registar Limite";
-                       e.printStackTrace();
-                   }
-               }
-       }   });
+        referenciaFirebase.child("Limite mensal")
+                .child(identificadorUtilizador)
+                .setValue(this);
     }
 
-
-    public void abrirTelaPrincipal(){
+    public void abrirInserirDespesas( View view) {
         Intent intent = new Intent(LimiteDeGastosActivity.this, InserirGastosPropiosActivity.class);
         startActivity(intent);
         finish();
@@ -115,12 +104,9 @@ public class LimiteDeGastosActivity extends AppCompatActivity implements EventLi
 
 
 
-//    public void abrirInserirDespesas( View view) {
-//        Intent intent = new Intent(LimiteDeGastosActivity.this, InserirGastosPropiosActivity.class);
-//        startActivity(intent);
-//        finish();
-//    }
-
-
-
 }
+
+
+
+
+

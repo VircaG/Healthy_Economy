@@ -8,6 +8,8 @@ public final class ConfiguracaoFirebase {
     private  static DatabaseReference referenciaFirebase;
     private  static FirebaseAuth autenticacao;
 
+
+
     public static DatabaseReference getFirebase(){
 
         if( referenciaFirebase == null){
@@ -25,6 +27,12 @@ public final class ConfiguracaoFirebase {
         }
         return autenticacao;
 
+    }
+
+    public static String getCurrentUser(){
+        String emailUtilizador = autenticacao.getCurrentUser().getEmail();
+        String idUtilizador = Base64Custom.condificarBase64(emailUtilizador);
+        return idUtilizador;
     }
 
 

@@ -40,13 +40,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String textoEmail = email.getText().toString();
-                String testoSenha = senha.getText().toString();
+                String textoSenha = senha.getText().toString();
 
                 if( !textoEmail.isEmpty() ){
-                    if( !testoSenha.isEmpty() ){
+                    if( !textoSenha.isEmpty() ){
                         utilizador = new Utilizador();
                         utilizador.setEmail( textoEmail );
-                        utilizador.setSenha(testoSenha );
+                        utilizador.setSenha(textoSenha );
                         validarLogin();
                         //autenticacao.signOut();
                     }else{
@@ -61,15 +61,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
-
-    private void verificarUtilizadorLogin(){
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        if(autenticacao.getCurrentUser() != null){
-            abrirTelaPrincipal();
-
-        }
-    }
     private void validarLogin(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.signInWithEmailAndPassword(
@@ -79,7 +70,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
               if(task.isSuccessful()){
-                  abrirTelaPrincipal();
+
+                  Preferencias preferencias = new Preferencias(LoginActivity.this);
+                  String identificadorUtilizadorLogado = Base64Custom.condificarBase64(utilizador.getEmail());
+                  preferencias.salvarDados(identificadorUtilizadorLogado);
+
+
+
+                  abrirTelaIserirLimite();
                   Toast.makeText(LoginActivity.this,"Sucesso ao fazer login", Toast.LENGTH_LONG).show();
               }else {
                   String exception = "";
@@ -101,20 +99,18 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    public void abrirTelaPrincipal(){
+    public void abrirTelaIserirLimite(){
         Intent intent = new Intent(LoginActivity.this, LimiteDeGastosActivity.class);
         startActivity(intent);
         finish();
     }
 
- /*
-
-   public void abrirInserirGastos(View view){
-        Intent intent = new Intent(LoginActivity.this,InserirGastosPropiosActivity.class);
-        startActivity(intent);
-
+    public void verificarUtilizadorLogado(){
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        if(autenticacao.getCurrentUser() != null){
+            abrirTelaIserirLimite();
+        }
     }
-*/
 
 
      public void abrirRegistarUtilizador(View view){

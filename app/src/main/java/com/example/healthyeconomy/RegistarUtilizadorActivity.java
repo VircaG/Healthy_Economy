@@ -32,8 +32,8 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
     private Button botaoRegistar;
     private Utilizador utilizador;
     private FirebaseAuth autenticacao;
-     FirebaseDatabase database;
-     DatabaseReference reference;
+    FirebaseDatabase database;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +131,10 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
                     String identificadorUtilizador = Base64Custom.condificarBase64(utilizador.getEmail());
                     utilizador.setIdUtilizador(identificadorUtilizador);
                     utilizador.salvarUtilizador();
+
+                    Preferencias preferencias = new Preferencias(RegistarUtilizadorActivity.this);
+                    preferencias.salvarDados(identificadorUtilizador);
+
                     Log.d("registo", "utilizador: " + autenticacao);
                     Log.d("registo", "utilizador: " + identificadorUtilizador);
 
