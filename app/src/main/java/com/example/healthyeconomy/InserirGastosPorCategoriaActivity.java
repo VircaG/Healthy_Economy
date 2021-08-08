@@ -18,11 +18,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.google.firebase.database.DataSnapshot;
-//import com.google.firebase.database.DatabaseError;
-//import com.google.firebase.database.DatabaseReference;
-//import com.google.firebase.database.FirebaseDatabase;
-//import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
@@ -41,8 +41,8 @@ public class InserirGastosPorCategoriaActivity extends AppCompatActivity {
     private Button botaoVisualizar;
     private GastosPorCategoria gastosPorCategoria;
 
-    //FirebaseDatabase database;
-    //DatabaseReference reference;
+    FirebaseDatabase database;
+    DatabaseReference reference;
     int maxid = 0;
 
 
@@ -62,7 +62,7 @@ public class InserirGastosPorCategoriaActivity extends AppCompatActivity {
         botaoEditar = (Button) findViewById(R.id.btn_editar_gastos_categoria);
         botaoVisualizar = (Button) findViewById(R.id.btn_visualizar_gastos_categoria);
 
-//        reference = database.getInstance().getReference().child("Gastos Por Categoria");
+        reference = database.getInstance().getReference().child("Gastos Por Categoria");
 
 
 
@@ -101,20 +101,20 @@ public class InserirGastosPorCategoriaActivity extends AppCompatActivity {
 
 
 
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if(snapshot.exists()){
-//                    maxid =(int) snapshot.getChildrenCount();
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    maxid =(int) snapshot.getChildrenCount();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         botaoInserir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,10 +125,15 @@ public class InserirGastosPorCategoriaActivity extends AppCompatActivity {
                 gastosPorCategoria.setSpinner(spinerPorCategorias.getSelectedItem().toString());
 
                 Toast.makeText(InserirGastosPorCategoriaActivity.this,"Inserido com sucesso",Toast.LENGTH_LONG).show();
-               // reference.child(String.valueOf(maxid + 1)).setValue( gastosPorCategoria);
+                reference.child(String.valueOf(maxid + 1)).setValue( gastosPorCategoria);
             }
         });
     }
 
-
+//    public void voltarAoInicio( View view){
+//        Intent intent = new Intent(InserirGastosPorCategoriaActivity.this,HomeFragment.class);
+//        //startActivity(intent);
+//        finish();
+//
+//    }
 }
