@@ -87,14 +87,14 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
                     if (!textoSobrenome.isEmpty()) {
                         utilizador = new Utilizador();
                         utilizador.setNome(textoNome);
-                        Log.d("registo", "utilizador: " + textoNome);
-                        utilizador.setEmail(textoEmail);
-                        Log.d("registo", "utilizador: " + textoEmail);
-                        utilizador.setSobrenome(textoSobrenome);
-                        Log.d("registo", "utilizador: " + textoSobrenome);
-                        utilizador.setSenha(textoSenha);
-                        Log.d("registo", "utilizador: " + textoSenha);
-                        registarUtilizador();
+//                        Log.d("registo", "utilizador: " + textoNome);
+//                        utilizador.setEmail(textoEmail);
+//                        Log.d("registo", "utilizador: " + textoEmail);
+//                        utilizador.setSobrenome(textoSobrenome);
+//                        Log.d("registo", "utilizador: " + textoSobrenome);
+//                        utilizador.setSenha(textoSenha);
+//                        Log.d("registo", "utilizador: " + textoSenha);
+//                        registarUtilizador();
                     } else {
                         senha.setError("Insira a sua password!");
                         senha.requestFocus();
@@ -132,8 +132,11 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
                     utilizador.setIdUtilizador(identificadorUtilizador);
                     utilizador.salvarUtilizador();
 
+
+
                     Preferencias preferencias = new Preferencias(RegistarUtilizadorActivity.this);
                     preferencias.salvarDados(identificadorUtilizador);
+
 
                     Log.d("registo", "utilizador: " + autenticacao);
                     Log.d("registo", "utilizador: " + identificadorUtilizador);
