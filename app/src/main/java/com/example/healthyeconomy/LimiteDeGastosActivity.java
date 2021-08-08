@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.icu.text.Bidi;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,86 +23,81 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.BreakIterator;
 import java.util.EventListener;
 
 public class LimiteDeGastosActivity extends AppCompatActivity implements EventListener {
     private EditText valorLimite;
     private Button btnSalvar;
     private Button btn_InserirDespesas;
-    private LimiteMensal limiteMensal;
-    private FirebaseAuth autenticacao;
-    private  Utilizador utilizador;
-    FirebaseDatabase database;
-    DatabaseReference reference;
-    int maxid = 0;
+
+    private  String  idUtilizadorLimite;
+
+    private DatabaseReference firebase;
+    private FirebaseAuth utilizadorFirebase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_limite_de_gastos);
 
+        utilizadorFirebase = ConfiguracaoFirebase.getFirebaseAutenticacao();
+
         valorLimite = (EditText) findViewById(R.id.editText_valor);
         btnSalvar = (Button) findViewById(R.id.btn_salvar);
         btn_InserirDespesas = (Button) findViewById(R.id.btn_inserirDespesas);
 
-        limiteMensal = new LimiteMensal();
-        reference = database.getInstance().getReference().child("Limite Mensal");
+        //Dados do Utilizador Logado
+        Preferencias preferencias = new Preferencias(LimiteDeGastosActivity.this);
+        idUtilizadorLimite = preferencias.getIdentificador();
 
-        reference.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    maxid = (int)snapshot.getChildrenCount();
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                limiteMensal = new LimiteMensal();
-                limiteMensal.setValorLimite(valorLimite.getText().toString());
-                //limiteMensal.setMes(spinerMes.getSelectedItem().toString());
+                String textovalor = valorLimite.getText().toString();
 
+                if(textovalor.isEmpty() ){
+                    Toast.makeText(LimiteDeGastosActivity.this,"Digite um valor do limite para enviar!", Toast.LENGTH_LONG).show();
+                }else{
 
-                Toast.makeText(LimiteDeGastosActivity.this,"Inserido com sucesso",Toast.LENGTH_LONG).show();
-                reference.child(String.valueOf(maxid + 1 )).setValue(limiteMensal);
+                    LimiteMensal limiteMensal = new LimiteMensal();
+                    limiteMensal.setIdUtilizador(idUtilizadorLimite);
+                    limiteMensal.setValorLimite(textovalor);
 
+                    salvarLimite(idUtilizadorLimite,limiteMensal);
+                    valorLimite.setText("");
 
+                }
             }
-
         });
 
 
     }
+     private boolean salvarLimite( String idUtilizadorLimite, LimiteMensal limiteMensal){
+         try {
 
-    public void guardar() {
-        FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        String identificadorUtilizador = Base64Custom.condificarBase64(utilizador.getEmail());
-        utilizador.setIdUtilizador(identificadorUtilizador);
-        utilizador.salvarUtilizador();
+            firebase = ConfiguracaoFirebase.getFirebase().child("Limite Mensal");
 
-        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
+            firebase.child(idUtilizadorLimite)
+                    .push()
+                    .setValue(limiteMensal);
+
+             return true;
+         }catch (Exception e)  {
+             e.printStackTrace();
+             return false;
+         }
+     }
 
 
-        referenciaFirebase.child("Limite mensal")
-                .child(identificadorUtilizador)
-                .setValue(this);
-    }
-
-    public void abrirInserirDespesas( View view) {
-        Intent intent = new Intent(LimiteDeGastosActivity.this, InserirGastosPropiosActivity.class);
+    public void inserirDespesas( View view){
+        Intent intent = new Intent(LimiteDeGastosActivity.this,
+                InserirGastosPropiosActivity.class);
         startActivity(intent);
         finish();
     }
-
 
 
 }
