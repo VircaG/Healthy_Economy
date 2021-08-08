@@ -29,11 +29,11 @@ public final class ConfiguracaoFirebase {
 
     }
 
-    public static String getCurrentUser(){
-        String emailUtilizador = autenticacao.getCurrentUser().getEmail();
-        String idUtilizador = Base64Custom.condificarBase64(emailUtilizador);
-        return idUtilizador;
-    }
+//    public static String getCurrentUser(){
+//        String emailUtilizador = autenticacao.getCurrentUser().getUid();
+//        String idUtilizador = Base64Custom.condificarBase64(emailUtilizador);
+//        return idUtilizador;
+//    }
 
 
 }
