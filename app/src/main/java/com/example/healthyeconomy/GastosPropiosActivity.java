@@ -1,6 +1,5 @@
 package com.example.healthyeconomy;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -20,21 +19,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
-public class InserirGastosPropiosActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class GastosPropiosActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private FirebaseAuth utilizadorFirebase;
     private DatabaseReference firebase;
 
     //private String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-    private static final String TAG ="InserirGastosPropiosActivity";
+    private static final String TAG ="GastosPropiosActivity";
     private TextView  mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private EditText descricao;
@@ -80,7 +75,7 @@ public class InserirGastosPropiosActivity extends AppCompatActivity implements A
         botaoVisualizar = (Button) findViewById(R.id.btn_visualizarGastos);
 
         //Dados do Utilizador Logado
-        Preferencias preferencias = new Preferencias(InserirGastosPropiosActivity.this);
+        Preferencias preferencias = new Preferencias(GastosPropiosActivity.this);
         idUtilizadorGP = preferencias.getIdentificador();
 
 
@@ -93,7 +88,7 @@ public class InserirGastosPropiosActivity extends AppCompatActivity implements A
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        InserirGastosPropiosActivity.this,
+                        GastosPropiosActivity.this,
                         android.R.style.Theme_Holo_Dialog_MinWidth,
                         mDateSetListener,
                         year, month, day);
@@ -108,7 +103,7 @@ public class InserirGastosPropiosActivity extends AppCompatActivity implements A
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month +1;
-                Log.d("InserirGastosPropiosActivity","onDateSet: mm/dd/yyy:" + month
+                Log.d("GastosPropiosActivity","onDateSet: mm/dd/yyy:" + month
                         + "/" + day + "/" + year);
 
                 String date = month + "/" + day +"/"+ year;
@@ -128,7 +123,7 @@ public class InserirGastosPropiosActivity extends AppCompatActivity implements A
                   // String textoCategoria = spinerCategorias.getItemAtPosition(onItemSelected(position)).toString();
 
                 if (textoDescricao.isEmpty()){
-                       Toast.makeText(InserirGastosPropiosActivity.this,"Digite a descrição!", Toast.LENGTH_LONG).show();
+                       Toast.makeText(GastosPropiosActivity.this,"Digite a descrição!", Toast.LENGTH_LONG).show();
 
                    } else {
                                  GastosPropios gastosPropios = new GastosPropios();
@@ -177,7 +172,7 @@ public class InserirGastosPropiosActivity extends AppCompatActivity implements A
     }
 
     public  void abrirGastosPorCategoria(View view){
-        Intent intent = new Intent(InserirGastosPropiosActivity.this,InserirGastosPorCategoriaActivity.class);
+        Intent intent = new Intent(GastosPropiosActivity.this, GastosPorCategoriaActivity.class);
         startActivity(intent);
         finish();
     }

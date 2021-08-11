@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -26,8 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
-public class InserirGastosPorCategoriaActivity extends AppCompatActivity {
-    public static final String TAG = "InserirGastosPorCategoriaActivity";
+public class GastosPorCategoriaActivity extends AppCompatActivity {
+    public static final String TAG = "GastosPorCategoriaActivity";
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
@@ -75,7 +74,7 @@ public class InserirGastosPorCategoriaActivity extends AppCompatActivity {
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        InserirGastosPorCategoriaActivity.this,
+                        GastosPorCategoriaActivity.this,
                         android.R.style.Theme_Holo_Dialog_MinWidth,
                         mDateSetListener,
                         year, month, day);
@@ -90,7 +89,7 @@ public class InserirGastosPorCategoriaActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month +1;
-                Log.d("InserirGastosPropiosActivity","onDateSet: mm/dd/yyy:" + month
+                Log.d("GastosPropiosActivity","onDateSet: mm/dd/yyy:" + month
                         + "/" + day + "/" + year);
 
                 String date = month + "/" + day +"/"+ year;
@@ -124,14 +123,14 @@ public class InserirGastosPorCategoriaActivity extends AppCompatActivity {
                 gastosPorCategoria.setData(dataCategoria.getText().toString());
                 gastosPorCategoria.setSpinner(spinerPorCategorias.getSelectedItem().toString());
 
-                Toast.makeText(InserirGastosPorCategoriaActivity.this,"Inserido com sucesso",Toast.LENGTH_LONG).show();
+                Toast.makeText(GastosPorCategoriaActivity.this,"Inserido com sucesso",Toast.LENGTH_LONG).show();
                 reference.child(String.valueOf(maxid + 1)).setValue( gastosPorCategoria);
             }
         });
     }
 
 //    public void voltarAoInicio( View view){
-//        Intent intent = new Intent(InserirGastosPorCategoriaActivity.this,HomeFragment.class);
+//        Intent intent = new Intent(GastosPorCategoriaActivity.this,HomeFragment.class);
 //        //startActivity(intent);
 //        finish();
 //
