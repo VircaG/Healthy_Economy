@@ -65,9 +65,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
     }
 
-    public void abrirActivityPrincipal(){
-        startActivity( new Intent( this, TelaPrincipalActivity.class));
-    }
+
 
 
 }

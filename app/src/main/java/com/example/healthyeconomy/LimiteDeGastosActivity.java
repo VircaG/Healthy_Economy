@@ -94,7 +94,7 @@ public class LimiteDeGastosActivity extends AppCompatActivity implements EventLi
 
     public void inserirDespesas( View view){
         Intent intent = new Intent(LimiteDeGastosActivity.this,
-                InserirGastosPropiosActivity.class);
+                TelaPrincipalActivity.class);
         startActivity(intent);
         finish();
     }

@@ -39,7 +39,8 @@ public class TelaPrincipalActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_principal, R.id.nav_perfil, R.id.nav_questionario,
+                R.id.nav_gastosC, R.id.nav_gastosP, R.id.nav_chat,R.id.nav_informacao)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

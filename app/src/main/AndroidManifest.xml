@@ -18,8 +18,8 @@
         </activity>
         <activity android:name=".TelaPrincipalActivity" />
         <activity android:name=".RegistarUtilizadorActivity" />
-        <activity android:name=".InserirGastosPropiosActivity" />
-        <activity android:name=".InserirGastosPorCategoriaActivity" />
+        <activity android:name=".GastosPropiosActivity" />
+        <activity android:name=".GastosPorCategoriaActivity" />
         <activity android:name=".LimiteDeGastosActivity" />
         <activity android:name=".MainActivity"/>
         <activity android:name=".QuestionarioActivity"/>

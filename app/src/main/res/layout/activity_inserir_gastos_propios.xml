@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#246265"
     android:gravity="center"
-    tools:context=".InserirGastosPropiosActivity">
+    tools:context=".GastosPropiosActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
