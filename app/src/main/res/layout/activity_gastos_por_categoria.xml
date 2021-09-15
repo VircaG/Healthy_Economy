@@ -78,7 +78,7 @@
             android:textAlignment="center"
             android:textSize="20sp"/>
         <EditText
-            android:id="@+id/editText_valor_categoria"
+            android:id="@+id/editText_limite_categoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -129,29 +129,6 @@
             android:layout_marginRight="24dp"
             android:text="Editar"
             android:backgroundTint="#e6e600"/>
-        <Button
-            android:id="@+id/btn_visualizar_gastos_categoria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:text="Visualizar"
-            android:backgroundTint="#ff0066"/>
 
-        <Button
-            android:id="@+id/btn_inicio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:text="Voltar"
-            android:onClick="voltarAoInicio"
-            android:backgroundTint="#03A9F4"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
