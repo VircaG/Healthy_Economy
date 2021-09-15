@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="botaoPadrao" parent="Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/colorPrimaryDarker</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
 
 <!--    <style name="Theme.NoActionBar">-->

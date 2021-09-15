@@ -5,50 +5,35 @@ import android.widget.Button;
 //import com.google.firebase.database.DatabaseReference;
 
 public class Questionario {
-    private String id;
-    private String spinner;
-    private String pergunta1;
-    private String pergunta2;
-    private String pergunta3;
-    private String resposta1;
-    private String resposta2;
-    private String resposta3;
-    private Button enviarQuest;
-    private Button editarQuest;
-    private Button visualizarQuest;
+    private String idUtilizador;
 
-    public void enviar(){
-//        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-//        referenciaFirebase.child("Questionário").child(getId()).setValue(this);
-    }
+    private String spinnerCate;
+    private String pergunta1;
+    private String resposta1;
+    private String pergunta2;
+    private String resposta2;
+    private String pergunta3;
+    private String resposta3;
+
 
     public Questionario(){
 
     }
 
-
-    public String getResposta1() {
-        return resposta1;
+    public String getIdUtilizador() {
+        return idUtilizador;
     }
 
-    public void setResposta1(String resposta1) {
-        this.resposta1 = resposta1;
+    public void setIdUtilizador(String idUtilizador) {
+        this.idUtilizador = idUtilizador;
     }
 
-    public String getId() {
-        return id;
+    public String getSpinnerCate() {
+        return spinnerCate;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getSpinner() {
-        return spinner;
-    }
-
-    public void setSpinner(String spinner) {
-        this.spinner = spinner;
+    public void setSpinnerCate(String spinnerCate) {
+        this.spinnerCate = spinnerCate;
     }
 
     public String getPergunta1() {
@@ -75,6 +60,14 @@ public class Questionario {
         this.pergunta3 = pergunta3;
     }
 
+    public String getResposta1() {
+        return resposta1;
+    }
+
+    public void setResposta1(String resposta1) {
+        this.resposta1 = resposta1;
+    }
+
     public String getResposta2() {
         return resposta2;
     }
@@ -89,29 +82,5 @@ public class Questionario {
 
     public void setResposta3(String resposta3) {
         this.resposta3 = resposta3;
-    }
-
-    public Button getEnviarQuest() {
-        return enviarQuest;
-    }
-
-    public void setEnviarQuest(Button enviarQuest) {
-        this.enviarQuest = enviarQuest;
-    }
-
-    public Button getEditarQuest() {
-        return editarQuest;
-    }
-
-    public void setEditarQuest(Button editarQuest) {
-        this.editarQuest = editarQuest;
-    }
-
-    public Button getVisualizarQuest() {
-        return visualizarQuest;
-    }
-
-    public void setVisualizarQuest(Button visualizarQuest) {
-        this.visualizarQuest = visualizarQuest;
     }
 }

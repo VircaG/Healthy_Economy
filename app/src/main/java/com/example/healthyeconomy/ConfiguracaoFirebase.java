@@ -5,6 +5,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public final class ConfiguracaoFirebase {
+
     private  static DatabaseReference referenciaFirebase;
     private  static FirebaseAuth autenticacao;
 
@@ -31,7 +32,7 @@ public final class ConfiguracaoFirebase {
 
 //    public static String getCurrentUser(){
 //        String emailUtilizador = autenticacao.getCurrentUser().getUid();
-//        String idUtilizador = Base64Custom.condificarBase64(emailUtilizador);
+//        String idUtilizador = Base64Custom.codificarBase64(emailUtilizador);
 //        return idUtilizador;
 //    }
 

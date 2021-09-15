@@ -1,66 +1,121 @@
 package com.example.healthyeconomy.ui.gastosCategoria;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.example.healthyeconomy.ConfiguracaoFirebase;
+import com.example.healthyeconomy.GastosPorCategoria;
+import com.example.healthyeconomy.GastosPorCategoriaActivity;
+import com.example.healthyeconomy.GastosPropios;
+import com.example.healthyeconomy.GastosPropiosActivity;
+import com.example.healthyeconomy.Preferencias;
 import com.example.healthyeconomy.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link GastosCategoriaFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class GastosCategoriaFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+   private ListView listViewGPC;
+   private ArrayAdapter adapterCategoria;
+   private ArrayList<String> gastoPorCategoria;
+   private DatabaseReference firebase;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public GastosCategoriaFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GastosCategoriaFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static GastosCategoriaFragment newInstance(String param1, String param2) {
-        GastosCategoriaFragment fragment = new GastosCategoriaFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gastos_categoria, container, false);
+
+
+        //Instânciar Objectos
+        gastoPorCategoria = new ArrayList<>();
+
+
+        //Inflate to layout for this fragment
+        View view1 = inflater.inflate(R.layout.fragment_gastos_categoria,container,false);
+
+        FloatingActionButton fab2 = view1.findViewById(R.id.fabAdicionarGastosCat);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adicionarGastosCategorias();
+
+            }
+        });
+
+
+        //Monta listView e adapter
+        listViewGPC = (ListView) view1.findViewById(R.id.lv_gastosCategoria);
+        adapterCategoria = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_list_item_1,
+                gastoPorCategoria
+        );
+
+        listViewGPC.setAdapter(adapterCategoria);
+
+        //Recuperar gastos por categoria do firebase
+        Preferencias preferencias1 = new Preferencias(getActivity());
+        String idUtilizadorGpC = preferencias1.getIdentificador();
+
+        firebase = ConfiguracaoFirebase.getFirebase()
+                .child("Gastos por Categoria")
+                .child(idUtilizadorGpC);
+
+        //Lister para recuperar gastos por Categoria
+        firebase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Limpar Lista
+                gastoPorCategoria.clear();
+
+                //Listar gastos por categoria
+                for( DataSnapshot dados1 : snapshot.getChildren()){
+                    GastosPorCategoria gastosPorCategoria = dados1.getValue(GastosPorCategoria.class);
+                    gastoPorCategoria.add(gastosPorCategoria.getDescricaoCategoria());
+                    gastoPorCategoria.add(gastosPorCategoria.getLimiteCategoria());
+                    gastoPorCategoria.add(gastosPorCategoria.getDataCategoria());
+                }
+                adapterCategoria.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return  view1;
+
+    }
+    public void adicionarGastosCategorias(){
+        Intent intent1 = new Intent();
+        intent1.setClass(getActivity(),GastosPorCategoriaActivity.class);
+        startActivity(intent1);
+
     }
 }

@@ -16,6 +16,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.EventListener;
 //import com.google.firebase.database.DatabaseReference;
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,12 +31,19 @@ public class LoginActivity extends AppCompatActivity {
   private Button botaoLogin;
   private Utilizador utilizador;
   private FirebaseAuth autenticacao;
+  private DatabaseReference firebase;
+
+  private String identificadorUserLogin;
+  private ValueEventListener  valueEventListenerUtilizador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+        //verificar se o utilizador já tem conta criada
+        verificarUtilizadorLogado();
 
         email = (EditText) findViewById(R.id.edit_login_email);
         senha = (EditText) findViewById(R.id.edit_login_senha);
@@ -62,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void validarLogin(){
+
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.signInWithEmailAndPassword(
                 utilizador.getEmail(),
@@ -69,53 +83,73 @@ public class LoginActivity extends AppCompatActivity {
         ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-              if(task.isSuccessful()){
 
-                  Preferencias preferencias = new Preferencias(LoginActivity.this);
-                  String identificadorUtilizadorLogado = Base64Custom.condificarBase64(utilizador.getEmail());
-                  preferencias.salvarDados(identificadorUtilizadorLogado);
+                if( task.isSuccessful() ){
 
 
+                    identificadorUserLogin = Base64Custom.codificarBase64(utilizador.getEmail());
 
-                  abrirTelaIserirLimite();
-                  Toast.makeText(LoginActivity.this,"Sucesso ao fazer login", Toast.LENGTH_LONG).show();
-              }else {
-                  String exception = "";
-                  try {
-                      throw task.getException();
-                  }catch (FirebaseAuthInvalidUserException e) {
-                     // exception = getString(R.string.email);
-                  }catch (FirebaseAuthInvalidCredentialsException e){
-                      //exception = getString(R.string.noMatch);
-                  }catch (Exception e){
-                     // exception = getString(R.string.errorLogin) + e.getMessage();
-                      e.printStackTrace();
-                  }
-                  Toast.makeText(LoginActivity.this, exception, Toast.LENGTH_SHORT).show();
-              }
+                    firebase = ConfiguracaoFirebase.getFirebase()
+                            .child("Utilizadores")
+                            .child(identificadorUserLogin);
+
+
+                    valueEventListenerUtilizador = new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            Utilizador utilizadorRecuperado = snapshot.getValue(Utilizador.class);
+
+                            Preferencias preferencias = new Preferencias(LoginActivity.this);
+                            preferencias.salvarDados( identificadorUserLogin ,utilizadorRecuperado.getNome());
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    };
+
+                    firebase.addListenerForSingleValueEvent(valueEventListenerUtilizador);
+
+
+
+                    abrirTelaPrincipal();
+                    Toast.makeText(LoginActivity.this, "Sucesso ao fazer login!", Toast.LENGTH_LONG ).show();
+                }else{
+                    Toast.makeText(LoginActivity.this, "Erro ao fazer login!", Toast.LENGTH_LONG ).show();
+                }
+
             }
         });
     }
 
 
-
-    public void abrirTelaIserirLimite(){
-        Intent intent = new Intent(LoginActivity.this, LimiteDeGastosActivity.class);
+//
+//    public void abrirTelaIserirLimite(){
+//        Intent intent = new Intent(LoginActivity.this, LimiteDeGastosActivity.class);
+//        startActivity(intent);
+//        finish();
+//    }
+    public void abrirRegistarUtilizador( View view){
+        Intent intent = new Intent(LoginActivity.this, RegistarUtilizadorActivity.class);
         startActivity(intent);
         finish();
+
+    }
+
+
+    public void abrirTelaPrincipal(){
+        Intent intent = new Intent(LoginActivity.this,LimiteDeGastosActivity.class);
+        startActivity(intent);
+        finish();
+
     }
 
     public void verificarUtilizadorLogado(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         if(autenticacao.getCurrentUser() != null){
-            abrirTelaIserirLimite();
+            abrirTelaPrincipal();
         }
     }
-
-
-     public void abrirRegistarUtilizador(View view){
-        Intent intent = new Intent(LoginActivity.this,RegistarUtilizadorActivity.class);
-        startActivity(intent);
-
-     }
 }

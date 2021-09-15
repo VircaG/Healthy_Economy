@@ -16,9 +16,9 @@
         tools:layout="@layout/fragment_principal" />
     <fragment
         android:id="@+id/nav_questionario"
-        android:name="com.example.healthyeconomy.ui.respQuestionario.QuestionarioFragment"
+        android:name="com.example.healthyeconomy.ui.respQuestionario.RespQuestFragment"
         android:label="@string/menu_quest"
-        tools:layout="@layout/fragment_questionario" />
+        tools:layout="@layout/fragment_resp_quest" />
     <fragment
         android:id="@+id/nav_gastosP"
         android:name="com.example.healthyeconomy.ui.gastosProprios.GastosPropriosFragment"
@@ -29,6 +29,11 @@
         android:name="com.example.healthyeconomy.ui.gastosCategoria.GastosCategoriaFragment"
         android:label="@string/menu_gastoC"
         tools:layout="@layout/fragment_gastos_categoria" />
+    <fragment
+        android:id="@+id/nav_contatos"
+        android:name="com.example.healthyeconomy.ui.contatos.ContatosFragment"
+        android:label="@string/menu_contatos"
+        tools:layout="@layout/fragment_contatos" />
     <fragment
         android:id="@+id/nav_chat"
         android:name="com.example.healthyeconomy.ui.chat.ChatFragment"

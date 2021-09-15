@@ -31,7 +31,10 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
     private boolean filho;
     private Button botaoRegistar;
     private Utilizador utilizador;
+
+
     private FirebaseAuth autenticacao;
+
     FirebaseDatabase database;
     DatabaseReference reference;
 
@@ -63,6 +66,7 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
                 utilizador.setSobrenome(sobrenome.getText().toString());
                 utilizador.setSenha(senha.getText().toString());
                 utilizador.setEmail(email.getText().toString());
+                utilizador.setProfissao(profissao.getText().toString());
 
 
                 // validarCampos();
@@ -118,7 +122,8 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         Task<AuthResult> authResultTask = autenticacao.createUserWithEmailAndPassword(
-                utilizador.getEmail(), utilizador.getSenha()
+                utilizador.getEmail(),
+                utilizador.getSenha()
 
         ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -127,19 +132,20 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
 
-                    // Toast.makeText(RegistarUtilizadorActivity.this, "Sucesso ao registar utilizador", Toast.LENGTH_LONG).show();
-                    String identificadorUtilizador = Base64Custom.condificarBase64(utilizador.getEmail());
-                    utilizador.setIdUtilizador(identificadorUtilizador);
-                    utilizador.salvarUtilizador();
+                   Toast.makeText(RegistarUtilizadorActivity.this, "Sucesso ao registar utilizador", Toast.LENGTH_LONG).show();
+
+                   String identificadorUtilizador = Base64Custom.codificarBase64(utilizador.getEmail());
+                   utilizador.setIdUtilizador(identificadorUtilizador);
+                   utilizador.salvarUtilizador();
 
 
 
                     Preferencias preferencias = new Preferencias(RegistarUtilizadorActivity.this);
-                    preferencias.salvarDados(identificadorUtilizador);
+                    preferencias.salvarDados(identificadorUtilizador, utilizador.getNome());
 
 
-                    Log.d("registo", "utilizador: " + autenticacao);
-                    Log.d("registo", "utilizador: " + identificadorUtilizador);
+//                    Log.d("registo", "utilizador: " + autenticacao);
+//                    Log.d("registo", "utilizador: " + identificadorUtilizador);
 
                     abrirLoginUtilizador();
                 } else {

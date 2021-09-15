@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,43 +27,47 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Calendar;
 
 public class GastosPorCategoriaActivity extends AppCompatActivity {
+    private FirebaseAuth utilizadorFirebase;
+    private DatabaseReference firebase;
+
     public static final String TAG = "GastosPorCategoriaActivity";
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    private String id;
+
     private EditText descricaoCategoria;
-    private EditText valorCategoria;
+    private EditText limiteCategoria;
     private TextView dataCategoria;
     Spinner spinerPorCategorias;
     private Button botaoInserir;
     private Button botaoEditar;
-    private Button botaoVisualizar;
-    private GastosPorCategoria gastosPorCategoria;
 
-    FirebaseDatabase database;
-    DatabaseReference reference;
-    int maxid = 0;
-
+    private  String  idUtilizadorGporC;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inserir_gastos_por_categoria);
+        setContentView(R.layout.activity_gastos_por_categoria);
+
+        utilizadorFirebase = ConfiguracaoFirebase.getFirebaseAutenticacao();
+
 
         spinerPorCategorias = (Spinner) findViewById(R.id.spinner_por_Categorias);
         mDisplayDate = (TextView) findViewById(R.id.tv_data_categoria);
+
         dataCategoria = (TextView) findViewById(R.id.tv_data_categoria);
         descricaoCategoria = (EditText) findViewById(R.id.editText_descricao);
-        valorCategoria = (EditText)findViewById(R.id.editText_valor_categoria);
+        limiteCategoria = (EditText)findViewById(R.id.editText_limite_categoria);
         botaoInserir = (Button) findViewById(R.id.btn_inserir_gastos_categoria);
         botaoEditar = (Button) findViewById(R.id.btn_editar_gastos_categoria);
-        botaoVisualizar = (Button) findViewById(R.id.btn_visualizar_gastos_categoria);
 
-        reference = database.getInstance().getReference().child("Gastos Por Categoria");
 
+
+        //Dados do Utilizador Logado
+        Preferencias preferencias = new Preferencias(GastosPorCategoriaActivity.this);
+        idUtilizadorGporC = preferencias.getIdentificador();
 
 
         mDisplayDate.setOnClickListener(new View.OnClickListener(){
@@ -99,40 +104,51 @@ public class GastosPorCategoriaActivity extends AppCompatActivity {
         };
 
 
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    maxid =(int) snapshot.getChildrenCount();
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
         botaoInserir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gastosPorCategoria = new GastosPorCategoria();
-                gastosPorCategoria.setDescricao(descricaoCategoria.getText().toString());
-                gastosPorCategoria.setValor(valorCategoria.getText().toString());
-                gastosPorCategoria.setData(dataCategoria.getText().toString());
-                gastosPorCategoria.setSpinner(spinerPorCategorias.getSelectedItem().toString());
 
-                Toast.makeText(GastosPorCategoriaActivity.this,"Inserido com sucesso",Toast.LENGTH_LONG).show();
-                reference.child(String.valueOf(maxid + 1)).setValue( gastosPorCategoria);
+                String textodDescricaoCategoria = descricaoCategoria.getText().toString();
+                String textoLimiteCategoria = limiteCategoria.getText().toString();
+                String textoDataCategoria =  dataCategoria.getText().toString();
+                //String textoSpinerCategoria = spinerPorCategorias.getItemAtPosition(onItemSelected(position)).toString();
+
+                if (textodDescricaoCategoria .isEmpty()){
+                    Toast.makeText(GastosPorCategoriaActivity.this,"Digite a descrição!", Toast.LENGTH_LONG).show();
+
+                } else {
+                    GastosPorCategoria gastosPorCategoria = new GastosPorCategoria();
+                    gastosPorCategoria .setIdUtilizador(idUtilizadorGporC);
+                    gastosPorCategoria .setDescricaoCategoria(textodDescricaoCategoria);
+                    gastosPorCategoria .setDataCategoria(textoDataCategoria);
+                    gastosPorCategoria .setLimiteCategoria(textoLimiteCategoria);
+
+
+                    salvarGastosPorCategoria(idUtilizadorGporC, gastosPorCategoria);
+                    descricaoCategoria.setText("");
+                    limiteCategoria.setText("");
+                    dataCategoria.setText("");
+                }
+
             }
         });
+
     }
 
-//    public void voltarAoInicio( View view){
-//        Intent intent = new Intent(GastosPorCategoriaActivity.this,HomeFragment.class);
-//        //startActivity(intent);
-//        finish();
-//
-//    }
+    public boolean salvarGastosPorCategoria(String idUtilizadorGporC, GastosPorCategoria gastosPorCategoria){
+        try{
+            firebase = ConfiguracaoFirebase.getFirebase().child("Gastos por Categoria");
+            firebase.child(idUtilizadorGporC)
+                    .push()
+                    .setValue(gastosPorCategoria);
+
+            return true;
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

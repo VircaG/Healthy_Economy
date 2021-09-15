@@ -5,86 +5,54 @@ import android.widget.Button;
 //import com.google.firebase.database.DatabaseReference;
 
 public class GastosPorCategoria {
-    private String id;
-    private String spinner;
-    private String descricao;
-    private String valor;
-    private String data;
-    private Button inserirGastos;
-    private Button editarGastos;
-    private Button visualizarGastos;
+    private String idUtilizador;
+    private String spinnerCategorias;
+    private String descricaoCategoria;
+    private String limiteCategoria;
+    private String dataCategoria;
 
-
-    public void inserir(){
-//        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-//        referenciaFirebase.child("Gastos Proprios").child(getId()).setValue(this);
-    }
 
     public GastosPorCategoria(){
 
     }
 
-    public String getId() {
-        return id;
+    public String getIdUtilizador() {
+        return idUtilizador;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdUtilizador(String idUtilizador) {
+        this.idUtilizador = idUtilizador;
     }
 
-    public String getSpinner() {
-        return spinner;
+    public String getSpinnerCategorias() {
+        return spinnerCategorias;
     }
 
-    public void setSpinner(String spinner) {
-        this.spinner = spinner;
+    public void setSpinnerCategorias(String spinnerCategorias) {
+        this.spinnerCategorias = spinnerCategorias;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescricaoCategoria() {
+        return descricaoCategoria;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescricaoCategoria(String descricaoCategoria) {
+        this.descricaoCategoria = descricaoCategoria;
     }
 
-    public String getValor() {
-        return valor;
+    public String getLimiteCategoria() {
+        return limiteCategoria;
     }
 
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setLimiteCategoria(String limiteCategoria) {
+        this.limiteCategoria = limiteCategoria;
     }
 
-    public String getData() {
-        return data;
+    public String getDataCategoria() {
+        return dataCategoria;
     }
 
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public Button getInserirGastos() {
-        return inserirGastos;
-    }
-
-    public void setInserirGastos(Button inserirGastos) {
-        this.inserirGastos = inserirGastos;
-    }
-
-    public Button getEditarGastos() {
-        return editarGastos;
-    }
-
-    public void setEditarGastos(Button editarGastos) {
-        this.editarGastos = editarGastos;
-    }
-
-    public Button getVisualizarGastos() {
-        return visualizarGastos;
-    }
-
-    public void setVisualizarGastos(Button visualizarGastos) {
-        this.visualizarGastos = visualizarGastos;
+    public void setDataCategoria(String dataCategoria) {
+        this.dataCategoria = dataCategoria;
     }
 }

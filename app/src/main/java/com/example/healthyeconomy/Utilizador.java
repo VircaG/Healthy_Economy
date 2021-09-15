@@ -31,7 +31,7 @@ public class Utilizador {
 
         FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
        // String identificadorUtilizador = "teste";
-        String identificadorUtilizador = Base64Custom.condificarBase64(autenticacao.getCurrentUser().getEmail());
+        String identificadorUtilizador = Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail());
         DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
 
         referenciaFirebase.child("Utilizadores")

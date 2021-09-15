@@ -32,21 +32,15 @@ public class GastosPropiosActivity extends AppCompatActivity implements AdapterV
     private static final String TAG ="GastosPropiosActivity";
     private TextView  mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+
     private EditText descricao;
     private EditText valor;
     private TextView data;
     Spinner spinerCategorias;
     private Button botaoInserir;
-    private Button botaoVisualizar;
 
 
     private  String  idUtilizadorGP;
-
-    //Spinner customSpinner;
-    //ArrayList<CustomItem> customList;
-    //private String identificadorUtilizador;
-
-
 
 
 
@@ -54,7 +48,7 @@ public class GastosPropiosActivity extends AppCompatActivity implements AdapterV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inserir_gastos_propios);
+        setContentView(R.layout.activity_gastos_propios);
 
         utilizadorFirebase = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
@@ -72,7 +66,7 @@ public class GastosPropiosActivity extends AppCompatActivity implements AdapterV
         spinerCategorias = (Spinner) findViewById(R.id.spiner_Categorias);
 
         botaoInserir = (Button) findViewById(R.id.btn_inserirGastos);
-        botaoVisualizar = (Button) findViewById(R.id.btn_visualizarGastos);
+
 
         //Dados do Utilizador Logado
         Preferencias preferencias = new Preferencias(GastosPropiosActivity.this);
