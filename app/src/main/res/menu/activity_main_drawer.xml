@@ -34,14 +34,19 @@
     <item android:title="Como posso te ajudar?">
         <menu>
             <item
+                android:id="@+id/nav_contatos"
+                android:icon="@drawable/ic_m_contatos"
+                android:title="@string/menu_contatos" />
+            <item
+                android:id="@+id/nav_chat"
+                android:icon="@drawable/ic_m_chat2"
+                android:title="@string/menu_chat" />
+            <item
                 android:id="@+id/nav_informacao"
                 android:icon="@drawable/ic_m_info"
                 android:title="@string/menu_informacao" />
 
-            <item
-                android:id="@+id/nav_chat"
-                android:icon="@drawable/ic_m_chat"
-                android:title="@string/menu_chat" />
+
         </menu>
     </item>
 
