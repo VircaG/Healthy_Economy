@@ -10,8 +10,8 @@ import com.google.firebase.database.DatabaseReference;
 public class GastosPropios {
 
     private String idUtilizador;
-    private String spinnerCategoria;
     private String decricao;
+    private String categoriaGP;
     private String valor;
     private String data;
 
@@ -26,13 +26,6 @@ public class GastosPropios {
         this.idUtilizador = idUtilizador;
     }
 
-    public String getSpinnerCategoria() {
-        return spinnerCategoria;
-    }
-
-    public void setSpinnerCategoria(String spinnerCategoria) {
-        this.spinnerCategoria = spinnerCategoria;
-    }
 
     public String getDecricao() {
         return decricao;
@@ -42,7 +35,13 @@ public class GastosPropios {
         this.decricao = decricao;
     }
 
+    public String getCategoriaGP() {
+        return categoriaGP;
+    }
 
+    public void setCategoriaGP(String categoriaGP) {
+        this.categoriaGP = categoriaGP;
+    }
 
     public String getValor() {
         return valor;

@@ -19,7 +19,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-
         <Spinner
             android:id="@+id/spiner_Categorias"
             android:layout_width="match_parent"
@@ -29,23 +28,10 @@
             android:layout_marginTop="80dp"
             android:layout_marginEnd="24dp"
             android:padding="10dp"
-            android:textSize="28sp"
+            android:gravity="center"
             android:textAlignment="center"
-            android:entries="@array/Categorias"
-            android:background="@drawable/spinner_background" />
+            android:textSize="28sp" />
 
-
-        <ImageView
-            android:id="@+id/Spinnercotumizacao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-           android:layout_marginLeft="320dp"
-            android:layout_marginTop="-33dp"
-            android:src="@drawable/ic_seta_baixo_circulo_preto__24dp">
-
-        </ImageView>
 
         <TextView
             android:id="@+id/tv_decricacao"
@@ -148,32 +134,6 @@
             android:layout_marginRight="24dp"
             android:text="@string/inserir"
             app:backgroundTint="#03A9F4" />
-
-        <Button
-            android:id="@+id/btn_visualizarGastos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:text="@string/visualizar"
-            app:backgroundTint="#e6e600" />
-
-
-        <Button
-            android:id="@+id/btn_gastos_por_categoria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:text="Inserir por Categoria"
-            android:onClick="abrirGastosPorCategoria"
-            app:backgroundTint="#ff0000" />
 
 
     </LinearLayout>
