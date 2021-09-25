@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-                    abrirTelaPrincipal();
+                    abrirLimitedeGastos();
                     Toast.makeText(LoginActivity.this, "Sucesso ao fazer login!", Toast.LENGTH_LONG ).show();
                 }else{
                     Toast.makeText(LoginActivity.this, "Erro ao fazer login!", Toast.LENGTH_LONG ).show();
@@ -137,9 +137,15 @@ public class LoginActivity extends AppCompatActivity {
         finish();
 
     }
+    public void abrirtelaPrincipal(){
+        Intent intent = new Intent(LoginActivity.this,TelaPrincipalActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
 
 
-    public void abrirTelaPrincipal(){
+    public void abrirLimitedeGastos(){
         Intent intent = new Intent(LoginActivity.this,LimiteDeGastosActivity.class);
         startActivity(intent);
         finish();
@@ -149,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
     public void verificarUtilizadorLogado(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         if(autenticacao.getCurrentUser() != null){
-            abrirTelaPrincipal();
+            abrirLimitedeGastos();
         }
     }
 }
