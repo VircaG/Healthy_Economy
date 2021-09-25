@@ -16,12 +16,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
 
-public class QuestionarioActivity extends AppCompatActivity {
+public class QuestionarioActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private FirebaseAuth utilizadorFirebase;
     private DatabaseReference firebase;
 
     private TextView pergunta1;
-    private Spinner spinnerQuest;
     private TextView resposta1;
     private TextView pergunta2;
     private EditText resposta2;
@@ -31,18 +30,32 @@ public class QuestionarioActivity extends AppCompatActivity {
 
     private String idUtilizadorQuest;
 
+    Spinner spinnerQuest;
+    String item;
+    Categoria categoria;
+
+    String [] categorias = {"Escolha duas categorias",
+            "Alimentação",
+            "Bares e Restaurantes",
+            "Casa",
+            "Compras",
+            "Cuidados Pessoais",
+            "Educação",
+            "Família e Filhos",
+            "Lazer e hobbies",
+            "Mercado",
+            "Presentes",
+            "Pets",
+            "Transporte",
+            "Trabalho",
+            "Seguro",
+            "Viagem"
+    };
+
+
     Integer count = 0;
     Integer itemSelecionado = 0;
 
-
-    //Conteudo do spinner
-    String [] mOptions = {"Escolha duas categorias",
-            "Alimentação", "Bares e Restaurantes", "Casa",
-        "Compras", "Cuidados Pessoais","Educação",
-        "Família e Filhos","Lazer e hobbies", "Mercado",
-         "Presentes", "Pets", "Transporte",
-         "Trabalho", "Seguro", "Viagem"
-    };
 
 
     @Override
@@ -53,9 +66,7 @@ public class QuestionarioActivity extends AppCompatActivity {
         utilizadorFirebase = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         pergunta1 = (TextView) findViewById(R.id.tv_Pergunta1);
-        spinnerQuest = (Spinner) findViewById(R.id.spinner_Quest);
         resposta1 =  (TextView) findViewById(R.id.tv_resposta1);
-
         pergunta2 =  (TextView)findViewById(R.id.tv_Pergunta2);
         resposta2 =  (EditText)  findViewById(R.id.editText_resposta2);
         pergunta3 =  (TextView)    findViewById(R.id.tv_Pergunta3);
@@ -63,32 +74,34 @@ public class QuestionarioActivity extends AppCompatActivity {
 
         botaoEnviarQuest= (Button) findViewById(R.id.btn_Enviar_Quest);
 
+        spinnerQuest = (Spinner) findViewById(R.id.spinner_Quest);
+        spinnerQuest.setOnItemSelectedListener(this);
+
+        categoria = new Categoria();
+        ArrayAdapter arrayAdapterQuest = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,categorias);
+        arrayAdapterQuest.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerQuest.setAdapter( arrayAdapterQuest);
+
+
         //Dados do Utilizador logado
         Preferencias preferencias = new Preferencias(QuestionarioActivity.this);
         idUtilizadorQuest = preferencias.getIdentificador();
 
-        //Criar Adapter
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item,mOptions);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //reference = database.getInstance().getReference().child("Questionario");
-        spinnerQuest.setAdapter(arrayAdapter);
-
-
         spinnerQuest.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //resposta1.setSelection(position);
-               // resposta1.setText(parent.getItemAtPosition(position).toString());
+               // resposta1.setText(position);
+                resposta1.setText(parent.getItemAtPosition(position).toString());
                 String s = null;
 
-                if( position == 0){
-                    itemSelecionado = 0;
-                    count = 0;
-                   resposta1.setText("");
-                    Toast.makeText(QuestionarioActivity.this,"As categorias foram apagadas," +
-                            "insira novamente",Toast.LENGTH_LONG).show();
-                }
+            if( position == 0){
+                itemSelecionado = 0;
+                count = 0;
+               resposta1.setText("");
+                Toast.makeText(QuestionarioActivity.this,"As categorias foram apagadas," +
+                        "insira novamente",Toast.LENGTH_LONG).show();
+            }
 
 
            if( position == 1 && itemSelecionado != position && count < 2){
@@ -203,8 +216,8 @@ public class QuestionarioActivity extends AppCompatActivity {
         botaoEnviarQuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String textopergunta1 = pergunta1.getText().toString();
-//                String textoSpinner = spinnerQuest.toString();
+                String textopergunta1 = pergunta1.getText().toString();
+                String textoCategoria =  spinnerQuest.getSelectedItem().toString();
                 String textoresposta1 = resposta1.getText().toString();
                 String textopergunta2 = pergunta2.getText().toString();
                 String textoresposta2 = resposta2.getText().toString();
@@ -217,19 +230,22 @@ public class QuestionarioActivity extends AppCompatActivity {
                 } else {
                     Questionario questionario = new Questionario();
                     questionario.setIdUtilizador(idUtilizadorQuest);
-//                    questionario.setPergunta1(textopergunta1);
-//                    questionario.setResposta1(textoresposta1);
-                    questionario.setPergunta2(textopergunta2);
-                    questionario.setResposta1(textoresposta2);
-                    questionario.setResposta3(textoresposta3);
-                    questionario.setPergunta3(textopergunta3);
-                    //questionario.setSpinner(textoquest);
+
+                        questionario.setPergunta1(textopergunta1);
+                        questionario.setResposta1(textoresposta1);
+
+                        questionario.setPergunta2(textopergunta2);
+                        questionario.setResposta2(textoresposta2);
+
+                        questionario.setResposta3(textoresposta3);
+                        questionario.setPergunta3(textopergunta3);
+                        questionario.setResposta1(textoCategoria);
 
 
-                    salvarQuestionario(idUtilizadorQuest,questionario);
-                    resposta1.setText("");
-                    resposta2.setText("");
-                    resposta3.setText("");
+                        salvarQuestionario(idUtilizadorQuest,questionario);
+                        resposta1.setText("");
+                        resposta2.setText("");
+                        resposta3.setText("");
 
                 }
             }
@@ -251,5 +267,27 @@ public class QuestionarioActivity extends AppCompatActivity {
          }
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        item = spinnerQuest.getSelectedItem().toString();
+    }
+    void SaveValue (String item){
+        if(item == "Escolha duas  categorias"){
+            Toast.makeText(this, "Por favor seleciona duas categorias", Toast.LENGTH_LONG).show();
+
+        } else {
+            categoria.setCategorias(item);
+
+            String id  = firebase.push().getKey();
+            //firebase.child(id).setValue(categorias);
+
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
 

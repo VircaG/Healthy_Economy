@@ -6,8 +6,6 @@ import android.widget.Button;
 
 public class Questionario {
     private String idUtilizador;
-
-    private String spinnerCate;
     private String pergunta1;
     private String resposta1;
     private String pergunta2;
@@ -26,14 +24,6 @@ public class Questionario {
 
     public void setIdUtilizador(String idUtilizador) {
         this.idUtilizador = idUtilizador;
-    }
-
-    public String getSpinnerCate() {
-        return spinnerCate;
-    }
-
-    public void setSpinnerCate(String spinnerCate) {
-        this.spinnerCate = spinnerCate;
     }
 
     public String getPergunta1() {
