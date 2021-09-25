@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.healthyeconomy.ConfiguracaoFirebase;
+import com.example.healthyeconomy.ContatoAdapter;
 import com.example.healthyeconomy.GastosPorCategoria;
 import com.example.healthyeconomy.GastosPorCategoriaActivity;
 import com.example.healthyeconomy.GastosPropios;
@@ -34,6 +35,8 @@ public class GastosCategoriaFragment extends Fragment {
    private ArrayAdapter adapterCategoria;
    private ArrayList<String> gastoPorCategoria;
    private DatabaseReference firebase;
+   private ValueEventListener valueEventListenerGastosPCategoria;
+
 
 
     public GastosCategoriaFragment() {
@@ -76,7 +79,7 @@ public class GastosCategoriaFragment extends Fragment {
                 android.R.layout.simple_list_item_1,
                 gastoPorCategoria
         );
-
+       // adapterCategoria = new (getActivity(),gastoPorCategoria);
         listViewGPC.setAdapter(adapterCategoria);
 
         //Recuperar gastos por categoria do firebase
@@ -100,6 +103,7 @@ public class GastosCategoriaFragment extends Fragment {
                     gastoPorCategoria.add(gastosPorCategoria.getDescricaoCategoria());
                     gastoPorCategoria.add(gastosPorCategoria.getLimiteCategoria());
                     gastoPorCategoria.add(gastosPorCategoria.getDataCategoria());
+                    //gastoPorCategoria.add(gastosPorCategoria.getCategoria());
                 }
                 adapterCategoria.notifyDataSetChanged();
             }

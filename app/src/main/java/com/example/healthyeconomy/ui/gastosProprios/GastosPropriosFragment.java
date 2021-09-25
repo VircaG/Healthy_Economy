@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class GastosPropriosFragment extends Fragment  {
     private ListView listViewGP;
-    private ArrayAdapter adapter;
+    private ArrayAdapter adapterGP;
     private ArrayList<String> gastosProprio;
     private DatabaseReference firebase;
 
@@ -66,13 +66,13 @@ public class GastosPropriosFragment extends Fragment  {
 
         //Monta recyclerView e adapter
         listViewGP = (ListView) view.findViewById(R.id.lv_gastosProprios);
-        adapter = new ArrayAdapter(
+        adapterGP = new ArrayAdapter(
                 getActivity(),
                android.R.layout.simple_list_item_1,
                 gastosProprio
 
         );
-            listViewGP.setAdapter(adapter);
+            listViewGP.setAdapter(adapterGP);
 
             //Recuperar gastos proprios do firebase
         Preferencias preferencias = new Preferencias(getActivity());
@@ -95,13 +95,14 @@ public class GastosPropriosFragment extends Fragment  {
                 //Listar gastosProprios
                 for (DataSnapshot dados : snapshot.getChildren()){
 
-                    GastosPropios gastosPropios = dados.getValue( GastosPropios.class);
+                    GastosPropios gastosPropios = dados.getValue(GastosPropios.class);
                     gastosProprio.add(gastosPropios.getDecricao());
                     gastosProprio.add(gastosPropios.getData());
-                    gastosProprio.add(gastosPropios.getValor());
+                    gastosProprio.add(String.valueOf(gastosPropios.getValor()));
+                    //gastosProprio.add(gastosPropios.getCategoriaGP());
 
                 }
-                adapter.notifyDataSetChanged();
+                adapterGP.notifyDataSetChanged();
             }
 
             @Override
