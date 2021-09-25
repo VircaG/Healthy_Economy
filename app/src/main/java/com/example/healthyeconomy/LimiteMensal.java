@@ -15,6 +15,7 @@ public class LimiteMensal {
 
 
     public LimiteMensal() {
+
     }
 
     public String getIdUtilizador() {
