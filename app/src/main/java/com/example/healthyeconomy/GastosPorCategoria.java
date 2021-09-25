@@ -2,11 +2,11 @@ package com.example.healthyeconomy;
 
 import android.widget.Button;
 
-//import com.google.firebase.database.DatabaseReference;
+
 
 public class GastosPorCategoria {
     private String idUtilizador;
-    private String spinnerCategorias;
+    private String categoria;
     private String descricaoCategoria;
     private String limiteCategoria;
     private String dataCategoria;
@@ -24,12 +24,12 @@ public class GastosPorCategoria {
         this.idUtilizador = idUtilizador;
     }
 
-    public String getSpinnerCategorias() {
-        return spinnerCategorias;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setSpinnerCategorias(String spinnerCategorias) {
-        this.spinnerCategorias = spinnerCategorias;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getDescricaoCategoria() {

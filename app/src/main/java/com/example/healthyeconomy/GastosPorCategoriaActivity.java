@@ -10,6 +10,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -22,13 +24,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
-public class GastosPorCategoriaActivity extends AppCompatActivity {
+public class GastosPorCategoriaActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener{
     private FirebaseAuth utilizadorFirebase;
-    private DatabaseReference firebase;
+    private DatabaseReference firebase = FirebaseDatabase.getInstance().getReference();
 
     public static final String TAG = "GastosPorCategoriaActivity";
     private TextView mDisplayDate;
@@ -40,9 +43,36 @@ public class GastosPorCategoriaActivity extends AppCompatActivity {
     private TextView dataCategoria;
     Spinner spinerPorCategorias;
     private Button botaoInserir;
-    private Button botaoEditar;
 
     private  String  idUtilizadorGporC;
+    Integer valorLimite = 0 ;
+    Integer valorGastos;
+    Integer valorTotalGastos = 0;
+
+    private String somaGastosProCate;
+
+    Spinner spinerPorCategoria;
+    String item;
+    Categoria categoria;
+
+    String [] categorias = {"Escolha a categoria",
+            "Alimentação",
+            "Bares e Restaurantes",
+            "Casa",
+            "Compras",
+            "Cuidados Pessoais",
+            "Educação",
+            "Família e Filhos",
+            "Lazer e hobbies",
+            "Mercado",
+            "Presentes",
+            "Pets",
+            "Transporte",
+            "Trabalho",
+            "Seguro",
+            "Viagem"
+    };
+
 
 
 
@@ -54,14 +84,27 @@ public class GastosPorCategoriaActivity extends AppCompatActivity {
         utilizadorFirebase = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
 
-        spinerPorCategorias = (Spinner) findViewById(R.id.spinner_por_Categorias);
+
         mDisplayDate = (TextView) findViewById(R.id.tv_data_categoria);
 
         dataCategoria = (TextView) findViewById(R.id.tv_data_categoria);
         descricaoCategoria = (EditText) findViewById(R.id.editText_descricao);
         limiteCategoria = (EditText)findViewById(R.id.editText_limite_categoria);
         botaoInserir = (Button) findViewById(R.id.btn_inserir_gastos_categoria);
-        botaoEditar = (Button) findViewById(R.id.btn_editar_gastos_categoria);
+
+
+        spinerPorCategorias = (Spinner) findViewById(R.id.spinner_por_Categorias);
+        spinerPorCategorias.setOnItemSelectedListener(this);
+
+        DatabaseReference gastosPorCategoriaMensalRef = firebase.child("Limite Mensal");
+
+        categoria = new Categoria();
+        ArrayAdapter arrayAdapterPorItem = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,categorias);
+        arrayAdapterPorItem.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinerPorCategorias.setAdapter(arrayAdapterPorItem);
+
+
 
 
 
@@ -97,13 +140,38 @@ public class GastosPorCategoriaActivity extends AppCompatActivity {
                 Log.d("GastosPropiosActivity","onDateSet: mm/dd/yyy:" + month
                         + "/" + day + "/" + year);
 
-                String date = month + "/" + day +"/"+ year;
+                String date = day + "/" + month +"/"+ year;
                 mDisplayDate.setText(date);
             }
 
         };
 
 
+        Query queryCetegoria = gastosPorCategoriaMensalRef.orderByChild("idUtilizador").equalTo(idUtilizadorGporC);
+        queryCetegoria.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterable<DataSnapshot> it = snapshot.getChildren();
+                for(DataSnapshot dados: it){
+                    LimiteMensal limiteMensalCatego = dados.getValue(LimiteMensal.class);
+
+                    valorLimite = Integer.valueOf(limiteMensalCatego.getValorLimite());
+                    //Log.i("val", limiteMensal1.getValorLimite());
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        inserirGatosPorCategoria();
+
+    }
+
+    public void inserirGatosPorCategoria(){
         botaoInserir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,29 +179,47 @@ public class GastosPorCategoriaActivity extends AppCompatActivity {
                 String textodDescricaoCategoria = descricaoCategoria.getText().toString();
                 String textoLimiteCategoria = limiteCategoria.getText().toString();
                 String textoDataCategoria =  dataCategoria.getText().toString();
-                //String textoSpinerCategoria = spinerPorCategorias.getItemAtPosition(onItemSelected(position)).toString();
+                String textoCategoria =  spinerPorCategorias.getSelectedItem().toString();
 
                 if (textodDescricaoCategoria .isEmpty()){
                     Toast.makeText(GastosPorCategoriaActivity.this,"Digite a descrição!", Toast.LENGTH_LONG).show();
 
                 } else {
                     GastosPorCategoria gastosPorCategoria = new GastosPorCategoria();
-                    gastosPorCategoria .setIdUtilizador(idUtilizadorGporC);
-                    gastosPorCategoria .setDescricaoCategoria(textodDescricaoCategoria);
-                    gastosPorCategoria .setDataCategoria(textoDataCategoria);
-                    gastosPorCategoria .setLimiteCategoria(textoLimiteCategoria);
+                    gastosPorCategoria.setIdUtilizador(idUtilizadorGporC);
+                    gastosPorCategoria.setDescricaoCategoria(textodDescricaoCategoria);
+                    gastosPorCategoria.setDataCategoria(textoDataCategoria);
+                    gastosPorCategoria.setLimiteCategoria(textoLimiteCategoria);
+                    gastosPorCategoria.setCategoria(textoCategoria);
+
+                    somaGastosProCate= gastosPorCategoria.getLimiteCategoria();
+                    valorGastos = Integer.valueOf(somaGastosProCate);
+                    valorTotalGastos += valorGastos;
+                    Log.d("valor", String.valueOf(valorTotalGastos));
 
 
-                    salvarGastosPorCategoria(idUtilizadorGporC, gastosPorCategoria);
-                    descricaoCategoria.setText("");
-                    limiteCategoria.setText("");
-                    dataCategoria.setText("");
+                    if (valorLimite >= valorGastos && valorLimite >= valorTotalGastos) {
+
+                        salvarGastosPorCategoria(idUtilizadorGporC, gastosPorCategoria);
+                        descricaoCategoria.setText("");
+                        limiteCategoria.setText("");
+                        dataCategoria.setText("");
+
+                    } else if (valorLimite <= valorGastos) {
+                        valorTotalGastos -= valorGastos;
+                        Toast.makeText(GastosPorCategoriaActivity.this, "Atingiu o limite mensal!", Toast.LENGTH_LONG).show();
+
+                    } else {
+                        Toast.makeText(GastosPorCategoriaActivity.this, "Atingiu o limite mensal!", Toast.LENGTH_LONG).show();
+
+                    }
                 }
 
             }
         });
 
     }
+
 
     public boolean salvarGastosPorCategoria(String idUtilizadorGporC, GastosPorCategoria gastosPorCategoria){
         try{
@@ -151,4 +237,27 @@ public class GastosPorCategoriaActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        item = spinerPorCategorias.getSelectedItem().toString();
+    }
+
+    void SaveValue (String item){
+        if(item == "Escolha a categoria"){
+            Toast.makeText(this, "Por favor seleciona a categoria", Toast.LENGTH_LONG).show();
+
+        } else {
+            categoria.setCategorias(item);
+
+            String id  = firebase.push().getKey();
+            //firebase.child(id).setValue(categorias);
+
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
