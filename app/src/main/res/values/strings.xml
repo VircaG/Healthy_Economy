@@ -18,24 +18,6 @@
     <string name="inserir">Inserir</string>
     <string name="visualizar">Visualizar</string>
 
-    <array name="Categorias">
-        <item>Alimentação</item>
-        <item>Bares e Restaurantes</item>
-        <item>Casa</item>
-        <item>Compras</item>
-        <item>Cuidados Pessoais</item>
-        <item>Educação</item>
-        <item>Família e Filhos</item>
-        <item>Lazer e hobbies</item>
-        <item>Mercado</item>
-        <item>Presentes</item>
-        <item>Pets</item>
-        <item>Transporte</item>
-        <item>Trabalho</item>
-        <item>Seguro</item>
-        <item>Viagem</item>
-    </array>
-
     <array name="Mês">
         <item>Janeiro</item>
         <item>Fevereiro</item>
