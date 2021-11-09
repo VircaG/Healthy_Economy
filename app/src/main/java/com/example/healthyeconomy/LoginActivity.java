@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String textoEmail = email.getText().toString();
                 String textoSenha = senha.getText().toString();
-
                 if( !textoEmail.isEmpty() ){
                     if( !textoSenha.isEmpty() ){
                         utilizador = new Utilizador();
@@ -64,13 +63,10 @@ public class LoginActivity extends AppCompatActivity {
                         //autenticacao.signOut();
                     }else{
                          senha.setError("Insira a sua password!");
-                         senha.requestFocus();
-                    }
+                         senha.requestFocus(); }
                 }else {
                     email.setError("Insira o seu email!");
-                    email.requestFocus();
-                }
-            }
+                    email.requestFocus(); } }
         });
     }
 
@@ -99,11 +95,9 @@ public class LoginActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                             Utilizador utilizadorRecuperado = snapshot.getValue(Utilizador.class);
-
                             Preferencias preferencias = new Preferencias(LoginActivity.this);
                             preferencias.salvarDados( identificadorUserLogin ,utilizadorRecuperado.getNome());
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
@@ -111,8 +105,6 @@ public class LoginActivity extends AppCompatActivity {
                     };
 
                     firebase.addListenerForSingleValueEvent(valueEventListenerUtilizador);
-
-
 
                     abrirLimitedeGastos();
                     Toast.makeText(LoginActivity.this, "Sucesso ao fazer login!", Toast.LENGTH_LONG ).show();
@@ -137,13 +129,6 @@ public class LoginActivity extends AppCompatActivity {
         finish();
 
     }
-    public void abrirtelaPrincipal(){
-        Intent intent = new Intent(LoginActivity.this,TelaPrincipalActivity.class);
-        startActivity(intent);
-        finish();
-
-    }
-
 
     public void abrirLimitedeGastos(){
         Intent intent = new Intent(LoginActivity.this,LimiteDeGastosActivity.class);

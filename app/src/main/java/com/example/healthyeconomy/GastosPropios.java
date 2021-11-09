@@ -26,7 +26,6 @@ public class GastosPropios {
         this.idUtilizador = idUtilizador;
     }
 
-
     public String getDecricao() {
         return decricao;
     }

@@ -185,7 +185,6 @@ public class GastosPropiosActivity extends AppCompatActivity implements AdapterV
 //
 //}
     public  void inserirGastos(){
-            // Log.d("valorLimite", String.valueOf(valorLimite));
             botaoInserir.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -193,7 +192,6 @@ public class GastosPropiosActivity extends AppCompatActivity implements AdapterV
                     String textoValor = valor.getText().toString();
                     String textoData = data.getText().toString();
                     String textoCategoria = spinerCategorias.getSelectedItem().toString();
-
 
                         if (textoDescricao.isEmpty()) {
                             Toast.makeText(GastosPropiosActivity.this, "Digite a descrição!", Toast.LENGTH_LONG).show();
@@ -224,15 +222,10 @@ public class GastosPropiosActivity extends AppCompatActivity implements AdapterV
 
                             } else {
                                 Toast.makeText(GastosPropiosActivity.this, "Atingiu o limite mensal!", Toast.LENGTH_LONG).show();
-
-                                //comparacao(valorLimite, valorTotalGastos);
                             }
                         }
-
                     }
-
-
-            });
+               });
 
 
     }

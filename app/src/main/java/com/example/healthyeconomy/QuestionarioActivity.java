@@ -102,15 +102,12 @@ public class QuestionarioActivity extends AppCompatActivity implements AdapterVi
                 Toast.makeText(QuestionarioActivity.this,"As categorias foram apagadas," +
                         "insira novamente",Toast.LENGTH_LONG).show();
             }
-
-
            if( position == 1 && itemSelecionado != position && count < 2){
                s = (String) spinnerQuest.getItemAtPosition(position);
                count++;
                itemSelecionado = position;
                resposta1.append(s + "\n");
            }
-
            if( position == 2 && itemSelecionado != position && count < 2){
                s = (String) spinnerQuest.getItemAtPosition(position);
                count++;
@@ -233,14 +230,11 @@ public class QuestionarioActivity extends AppCompatActivity implements AdapterVi
 
                         questionario.setPergunta1(textopergunta1);
                         questionario.setResposta1(textoresposta1);
-
                         questionario.setPergunta2(textopergunta2);
                         questionario.setResposta2(textoresposta2);
-
                         questionario.setResposta3(textoresposta3);
                         questionario.setPergunta3(textopergunta3);
                         questionario.setResposta1(textoCategoria);
-
 
                         salvarQuestionario(idUtilizadorQuest,questionario);
                         resposta1.setText("");

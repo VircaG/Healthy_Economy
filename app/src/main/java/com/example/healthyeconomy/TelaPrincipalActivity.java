@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -17,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
@@ -32,10 +35,18 @@ import androidx.appcompat.widget.Toolbar;
 public class TelaPrincipalActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private DatabaseReference firebase = FirebaseDatabase.getInstance().getReference();
 
     private FirebaseAuth utilizadorFirebase;
-    private DatabaseReference firebase;
-    private String identificadorContato;
+    private String idContato;
+
+    private  String  idUtilizadorTelaPrincipal;
+
+    private String nome,email;
+    private TextView nomeUtilizador;
+    private TextView  emailUtilizador;
+
+    View hView;
 
     //private String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -44,17 +55,27 @@ public class TelaPrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navegacacao);
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        //config para passar os dados
+        hView = navigationView.getHeaderView(0);
+        nomeUtilizador = hView.findViewById(R.id.tv_nomeUtilizador);
+        emailUtilizador = hView.findViewById(R.id.tv_emailUtilizador);
+
+
         utilizadorFirebase = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        DatabaseReference telaprincipalRef = firebase.child("Utilizadores");
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
+        //Dados do Utilizador Logado
+        Preferencias preferencias = new Preferencias(TelaPrincipalActivity.this);
+       idUtilizadorTelaPrincipal = preferencias.getIdentificador();
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        //NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -67,6 +88,33 @@ public class TelaPrincipalActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
+        Query queryCetegoria = telaprincipalRef.orderByChild("idUtilizador").equalTo(idUtilizadorTelaPrincipal);
+        queryCetegoria.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterable<DataSnapshot> it = snapshot.getChildren();
+                for(DataSnapshot dados: it){
+                    Utilizador utilizador = dados.getValue(Utilizador.class);
+
+                   nome = utilizador.getNome();
+                   email = utilizador.getEmail();
+
+                   nomeUtilizador.setText(nome);
+                   emailUtilizador.setText(email);
+
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     @Override
@@ -106,14 +154,14 @@ public class TelaPrincipalActivity extends AppCompatActivity {
 
         //Configurações do Dialog
         alertDialog.setTitle("Novo contato");
-        alertDialog.setMessage("E-mail do usuário");
+        alertDialog.setMessage("E-mail do utilizador");
         alertDialog.setCancelable(false);
 
         final EditText editText = new EditText(TelaPrincipalActivity.this);
         alertDialog.setView( editText );
 
         //Configura botões
-        alertDialog.setPositiveButton("Cadastrar", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -125,11 +173,11 @@ public class TelaPrincipalActivity extends AppCompatActivity {
                 }else{
 
                     //Verificar se o usuário já está cadastrado no nosso App
-                   identificadorContato = Base64Custom.codificarBase64(emailContato);
+                   idContato = Base64Custom.codificarBase64(emailContato);
                  // identificadorContato  = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                     //Recuperar instância Firebase
-                    firebase = ConfiguracaoFirebase.getFirebase().child("Utilizadores").child(identificadorContato);
+                    firebase = ConfiguracaoFirebase.getFirebase().child("Utilizadores").child(idContato);
 
                     firebase.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -147,10 +195,10 @@ public class TelaPrincipalActivity extends AppCompatActivity {
                                 firebase = ConfiguracaoFirebase.getFirebase();
                                 firebase = firebase.child("Contatos")
                                         .child( identificadorUsuarioLogado )
-                                        .child( identificadorContato );
+                                        .child(idContato );
 
                                 Contato contato = new Contato();
-                                contato.setIdentificadorUtilizador( identificadorContato );
+                                contato.setIdUtilizador( idContato );
                                 contato.setEmail(utilizadorContato.getEmail() );
                                 contato.setNome( utilizadorContato.getNome() );
                                 contato.setProfissao(utilizadorContato.getProfissao());
@@ -158,7 +206,7 @@ public class TelaPrincipalActivity extends AppCompatActivity {
                                 firebase.setValue( contato );
 
                             }else {
-                                Toast.makeText(TelaPrincipalActivity.this, "Usuário não possui cadastro.", Toast.LENGTH_LONG)
+                                Toast.makeText(TelaPrincipalActivity.this, "Utilizador não possui cadastro.", Toast.LENGTH_LONG)
                                         .show();
                             }
 

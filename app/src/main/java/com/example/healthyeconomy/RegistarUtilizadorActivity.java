@@ -43,6 +43,8 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registar_utilizador);
 
+
+
         nome = findViewById(R.id.edit_registar_nome);
         sobrenome = findViewById(R.id.edit_registar_sobrenome);
         senha = findViewById(R.id.edit_registar_senha);
@@ -61,16 +63,28 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                Integer textoContato = Integer.valueOf(String.valueOf(contato.getText().length()));
+
                 utilizador = new Utilizador();
                 utilizador.setNome(nome.getText().toString());
                 utilizador.setSobrenome(sobrenome.getText().toString());
                 utilizador.setSenha(senha.getText().toString());
                 utilizador.setEmail(email.getText().toString());
                 utilizador.setProfissao(profissao.getText().toString());
-
-
+                utilizador.setContato(contato.getText().toString());
+                utilizador.setEstadoCivil(estadoCivil.getText().toString());
+                utilizador.setIdade(idade.getText().toString());
+                utilizador.setMorada(morada.getText().toString());
                 // validarCampos();
-                registarUtilizador();
+
+                if(textoContato < 9 || textoContato > 9){
+                    Toast.makeText(RegistarUtilizadorActivity.this,
+                            "Numero de telefone invalido", Toast.LENGTH_LONG).show();
+
+                }else{
+                    registarUtilizador();
+                }
+
 
 
             }
@@ -119,41 +133,38 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
 
     }
     private void registarUtilizador() {
+
+
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         Task<AuthResult> authResultTask = autenticacao.createUserWithEmailAndPassword(
                 utilizador.getEmail(),
                 utilizador.getSenha()
-
         ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-
                 if (task.isSuccessful()) {
 
-                   Toast.makeText(RegistarUtilizadorActivity.this, "Sucesso ao registar utilizador", Toast.LENGTH_LONG).show();
 
+                   Toast.makeText(RegistarUtilizadorActivity.this,
+                           "Sucesso ao registar utilizador", Toast.LENGTH_LONG).show();
                    String identificadorUtilizador = Base64Custom.codificarBase64(utilizador.getEmail());
                    utilizador.setIdUtilizador(identificadorUtilizador);
                    utilizador.salvarUtilizador();
 
-
-
-                    Preferencias preferencias = new Preferencias(RegistarUtilizadorActivity.this);
+                    Preferencias preferencias = new Preferencias(
+                            RegistarUtilizadorActivity.this);
                     preferencias.salvarDados(identificadorUtilizador, utilizador.getNome());
-
-
-//                    Log.d("registo", "utilizador: " + autenticacao);
-//                    Log.d("registo", "utilizador: " + identificadorUtilizador);
-
                     abrirLoginUtilizador();
                 } else {
                     String erroExcecao = "";
+
                     try {
                         throw task.getException();
                     } catch (FirebaseAuthWeakPasswordException e) {
-                        erroExcecao = "Digita uma senha mais forte,contendo mais caracteres e com letras e números!";
+                        erroExcecao = "Digita uma senha mais forte,contendo mais caracteres" +
+                                " e com letras e números!";
                     } catch (FirebaseAuthInvalidCredentialsException e) {
                         erroExcecao = "O e-mail digitado é inválido, digita um novo e-mail!";
                     } catch (FirebaseAuthUserCollisionException e) {
@@ -162,16 +173,11 @@ public class RegistarUtilizadorActivity extends AppCompatActivity {
                         erroExcecao = "Ao registar utilizador";
                         e.printStackTrace();
                     }
-                    Toast.makeText(RegistarUtilizadorActivity.this, "Erro : " + erroExcecao, Toast.LENGTH_LONG).show();
-
-                    //Log.i(utilizador.getEmail(),utilizador.getSenha());
-
+                    Toast.makeText(RegistarUtilizadorActivity.this, "Erro : "
+                            + erroExcecao, Toast.LENGTH_LONG).show();
                 }
-
             }
         });
-
-
     }
 
     public void abrirLoginUtilizador() {

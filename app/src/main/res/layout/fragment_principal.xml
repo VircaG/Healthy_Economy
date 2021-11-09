@@ -36,5 +36,10 @@
             android:drawableRight="@drawable/ic_dinheiro_50dp"
             android:textAlignment="center" />
 
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="555dp" />
+
     </LinearLayout>
+
 </FrameLayout>

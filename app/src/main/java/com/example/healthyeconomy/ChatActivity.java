@@ -118,12 +118,10 @@ public class ChatActivity extends AppCompatActivity {
 
                 if(textoMensagem.isEmpty()){
                     Toast.makeText(ChatActivity.this,"Digite uma mensagem para enviar!",Toast.LENGTH_LONG).show();
-
                 }else{
                     Mensagem mensagem = new Mensagem();
                     mensagem.setIdUtilizador(idUtilizadorRemetente);
                     mensagem.setMensagem(textoMensagem);
-
 
                     //salvamos mensagem para o remetente
                    Boolean retornoMensagemRemetente = salvarMensagem(idUtilizadorRemetente,idUtilizadorDestinatario,mensagem);
@@ -143,7 +141,6 @@ public class ChatActivity extends AppCompatActivity {
                             ).show();
                         }
                     }
-
                     //Salvamos Conversa para o remetente
                     Chat chat = new Chat();
                     chat.setIdUtilizadorChat(idUtilizadorDestinatario);
@@ -163,7 +160,6 @@ public class ChatActivity extends AppCompatActivity {
                          chat.setNome(nomeUtilizadorRemetente);
                          chat.setMensagem(textoMensagem);
 
-
                      Boolean retornoChatDestinatario = salvarChat(idUtilizadorDestinatario, idUtilizadorRemetente, chat);
                          if (!retornoChatDestinatario){
                              Toast.makeText(
@@ -173,9 +169,7 @@ public class ChatActivity extends AppCompatActivity {
                              ).show();
                          }
                      }
-
                     editMesagem.setText("");
-
                 }
             }
         });

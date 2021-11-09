@@ -12,10 +12,7 @@ public class LimiteMensal {
     private String idUtilizador;
     private String valorLimite;
 
-
-
     public LimiteMensal() {
-
     }
 
     public String getIdUtilizador() {

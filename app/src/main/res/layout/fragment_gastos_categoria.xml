@@ -8,26 +8,26 @@
     tools:context=".ui.gastosCategoria.GastosCategoriaFragment">
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdicionarGastosCat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="600dp"
+        android:backgroundTint="#246265"
+        android:clickable="true"
+        android:foregroundGravity="left"
+        android:src="@drawable/ic_m_categoria"
+        app:fabSize="auto" />
 
     <ListView
         android:id="@+id/lv_gastosCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@color/white"/>
+        android:background="@color/white">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAdicionarGastosCat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="90mm"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#246265"
-        android:clickable="true"
-        android:foregroundGravity="left"
-        android:src="@drawable/ic_m_categoria"
-        app:fabSize="auto"/>
+    </ListView>
 
 
 </FrameLayout>

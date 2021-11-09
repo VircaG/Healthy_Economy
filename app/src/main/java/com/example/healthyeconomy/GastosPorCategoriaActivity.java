@@ -49,7 +49,7 @@ public class GastosPorCategoriaActivity extends AppCompatActivity  implements Ad
     Integer valorGastos;
     Integer valorTotalGastos = 0;
 
-    private String somaGastosProCate;
+    private String somaGastosPorCate;
 
     Spinner spinerPorCategoria;
     String item;
@@ -170,12 +170,10 @@ public class GastosPorCategoriaActivity extends AppCompatActivity  implements Ad
         inserirGatosPorCategoria();
 
     }
-
     public void inserirGatosPorCategoria(){
         botaoInserir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String textodDescricaoCategoria = descricaoCategoria.getText().toString();
                 String textoLimiteCategoria = limiteCategoria.getText().toString();
                 String textoDataCategoria =  dataCategoria.getText().toString();
@@ -192,32 +190,25 @@ public class GastosPorCategoriaActivity extends AppCompatActivity  implements Ad
                     gastosPorCategoria.setLimiteCategoria(textoLimiteCategoria);
                     gastosPorCategoria.setCategoria(textoCategoria);
 
-                    somaGastosProCate= gastosPorCategoria.getLimiteCategoria();
-                    valorGastos = Integer.valueOf(somaGastosProCate);
+                    somaGastosPorCate= gastosPorCategoria.getLimiteCategoria();
+                    valorGastos = Integer.valueOf(somaGastosPorCate);
                     valorTotalGastos += valorGastos;
                     Log.d("valor", String.valueOf(valorTotalGastos));
 
-
                     if (valorLimite >= valorGastos && valorLimite >= valorTotalGastos) {
-
                         salvarGastosPorCategoria(idUtilizadorGporC, gastosPorCategoria);
                         descricaoCategoria.setText("");
                         limiteCategoria.setText("");
                         dataCategoria.setText("");
-
                     } else if (valorLimite <= valorGastos) {
                         valorTotalGastos -= valorGastos;
                         Toast.makeText(GastosPorCategoriaActivity.this, "Atingiu o limite mensal!", Toast.LENGTH_LONG).show();
-
                     } else {
                         Toast.makeText(GastosPorCategoriaActivity.this, "Atingiu o limite mensal!", Toast.LENGTH_LONG).show();
-
                     }
                 }
-
             }
         });
-
     }
 
 

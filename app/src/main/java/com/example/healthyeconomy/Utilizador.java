@@ -13,16 +13,15 @@ public class Utilizador {
     private String Nome;
     private String sobrenome;
     private String senha;
-    private int idade;
+    private String idade;
     private String profissao;
     private String estadoCivil;
     private String contato;
     private String email;
     private String morada;
-    private boolean filho;
+    //private Boolean filho;
     private String idUtilizador;
     private Button btnRegistar;
-
 
     public Utilizador() {
     }
@@ -88,11 +87,11 @@ public class Utilizador {
         this.senha = senha;
     }
 
-    public int getIdade() {
+    public String getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(String idade) {
         this.idade = idade;
     }
 
@@ -134,14 +133,6 @@ public class Utilizador {
 
     public void setMorada(String morada) {
         this.morada = morada;
-    }
-
-    public boolean isFilho() {
-        return filho;
-    }
-
-    public void setFilho(boolean filho) {
-        this.filho = filho;
     }
 
     public Button getBtnRegistar() {

@@ -32,6 +32,7 @@ import java.util.EventListener;
 public class LimiteDeGastosActivity extends AppCompatActivity implements EventListener {
     private EditText valorLimite;
     private Button btnSalvar;
+    //String valor;
     Integer valor;
 
 
@@ -70,6 +71,7 @@ public class LimiteDeGastosActivity extends AppCompatActivity implements EventLi
                 Iterable<DataSnapshot> it = snapshot.getChildren();
                 for(DataSnapshot dados: it){
                     LimiteMensal limiteMensal1 = dados.getValue(LimiteMensal.class);
+                    //valor = (limiteMensal1.getValorLimite());
                     valor = Integer.valueOf(limiteMensal1.getValorLimite());
                 }
                 if( valor != null){
@@ -107,7 +109,7 @@ public class LimiteDeGastosActivity extends AppCompatActivity implements EventLi
          btnSalvar.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 String textovalor = String.valueOf(valorLimite.getText().length());
+                 String textovalor = String.valueOf(valorLimite.getText());
 
                  if (textovalor == null) {
                      Toast.makeText(LimiteDeGastosActivity.this,
@@ -115,6 +117,7 @@ public class LimiteDeGastosActivity extends AppCompatActivity implements EventLi
                  } else {
                      limiteMensal.setIdUtilizador(idUtilizadorLimite);
                      limiteMensal.setValorLimite(textovalor);
+                     //valor = (limiteMensal.getValorLimite());
                      valor= Integer.valueOf(limiteMensal.getValorLimite());
 
                      salvarLimite(idUtilizadorLimite, limiteMensal);

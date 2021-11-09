@@ -1,7 +1,7 @@
 package com.example.healthyeconomy;
 
 public class Contato {
-    private String identificadorUtilizador;
+    private String idUtilizador;
     private String nome;
     private String profissao;
     private String email;
@@ -9,12 +9,12 @@ public class Contato {
     public Contato() {
     }
 
-    public String getIdentificadorUtilizador() {
-        return identificadorUtilizador;
+    public String getIdUtilizador() {
+        return idUtilizador;
     }
 
-    public void setIdentificadorUtilizador(String identificadorUtilizador) {
-        this.identificadorUtilizador = identificadorUtilizador;
+    public void setIdUtilizador(String idUtilizador) {
+        this.idUtilizador = idUtilizador;
     }
 
     public String getNome() {
