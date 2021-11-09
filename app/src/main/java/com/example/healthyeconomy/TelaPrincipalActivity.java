@@ -103,9 +103,6 @@ public class TelaPrincipalActivity extends AppCompatActivity {
 
                    nomeUtilizador.setText(nome);
                    emailUtilizador.setText(email);
-
-
-
                 }
             }
 

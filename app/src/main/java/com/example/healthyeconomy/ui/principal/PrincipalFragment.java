@@ -8,9 +8,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.healthyeconomy.CategoriaValorAdapter;
 import com.example.healthyeconomy.ConfiguracaoFirebase;
+import com.example.healthyeconomy.GastosPorCategoria;
+import com.example.healthyeconomy.GastosPropios;
 import com.example.healthyeconomy.LimiteDeGastosActivity;
 import com.example.healthyeconomy.LimiteMensal;
 import com.example.healthyeconomy.Preferencias;
@@ -23,10 +28,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 
 public class PrincipalFragment extends Fragment {
     private TextView mostrarLimite;
     private String myStr;
+
+    private ListView listViewCateVal;
+    private ArrayAdapter adapterCateVal;
+    private ArrayList<GastosPorCategoria> cateVal;
+
     private DatabaseReference firebase = FirebaseDatabase.getInstance().getReference();;
     private  String  idUtilizadorPrincipal;
     private FirebaseAuth utilizadorFirebase;
@@ -46,6 +58,9 @@ public class PrincipalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //instanciar objeto
+        cateVal = new ArrayList<>();
+
         // Inflate the layout for this fragment
         View viewPrincipal = inflater.inflate(R.layout.fragment_principal, container, false);
         utilizadorFirebase = ConfiguracaoFirebase.getFirebaseAutenticacao();
@@ -53,11 +68,53 @@ public class PrincipalFragment extends Fragment {
         mostrarLimite = (TextView)viewPrincipal.findViewById(R.id.tv_mostrarLimite);
         DatabaseReference limiteMensalRef = firebase.child("Limite Mensal");
 
+        //Monta recyclerView e adapter
+            listViewCateVal = (ListView) viewPrincipal.findViewById(R.id.lv_CategoriaValor);
+//            adapterCateVal = new ArrayAdapter(
+//                    getActivity(),
+//                    android.R.layout.simple_list_item_1,
+//                    cateVal
+//
+//            );
+            adapterCateVal = new CategoriaValorAdapter(getActivity(), cateVal);
+            listViewCateVal.setAdapter(adapterCateVal);
 
-        //Dados do Utilizador Logado
+        //Dados do Utilizador Login
         Preferencias preferencias = new Preferencias(getActivity());
         idUtilizadorPrincipal = preferencias.getIdentificador();
 
+        //
+        firebase = ConfiguracaoFirebase.getFirebase()
+                .child("Gastos por Categoria")
+                .child( idUtilizadorPrincipal);
+
+        //Listener para recuperargastosproprios
+        firebase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Limpar Lista
+                cateVal.clear();
+
+                //Listar gastosProprios
+                for (DataSnapshot dadosCatVal : snapshot.getChildren()){
+                    GastosPorCategoria gastosPorCategoria1 = dadosCatVal.getValue(GastosPorCategoria.class);
+                    cateVal.add(gastosPorCategoria1);
+                   // cateVal.add(gastosPorCategoria1.getLimiteCategoria());
+//                    gastosPorCategoria1.add(cateVal.getDecricao());
+//                    gastosProprio.add(gastosPropios.getData());
+//                    gastosProprio.add(String.valueOf(gastosPropios.getValor()));
+
+                }
+                adapterCateVal.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //return  viewPrincipal;
 
         Query query1 = limiteMensalRef.orderByChild("idUtilizador").equalTo(idUtilizadorPrincipal);
         query1.addListenerForSingleValueEvent(new ValueEventListener() {

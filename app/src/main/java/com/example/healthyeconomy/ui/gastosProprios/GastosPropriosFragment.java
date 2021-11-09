@@ -77,8 +77,8 @@ public class GastosPropriosFragment extends Fragment  {
             //Recuperar gastos proprios do firebase
         Preferencias preferencias = new Preferencias(getActivity());
         String idUtilizadorGP = preferencias.getIdentificador();
-       // String identificadorUserLogado = preferencias.getIdentificador();
 
+        // String identificadorUserLogado = preferencias.getIdentificador();
         firebase = ConfiguracaoFirebase.getFirebase()
                 .child("Gastos Próprios")
                 .child(idUtilizadorGP);
