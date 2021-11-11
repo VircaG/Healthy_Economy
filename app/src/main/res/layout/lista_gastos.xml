@@ -2,26 +2,30 @@
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_categorialv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"/>
 
     <TextView
         android:id="@+id/tv_data"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:textColor="#000"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:paddingTop="8dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"/>
-    <TextView
-        android:id="@+id/tv_categorialv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:textSize="14sp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="8dp"/>
+
+
     <TextView
         android:id="@+id/tv_desGastos"
         android:layout_width="match_parent"
@@ -32,6 +36,7 @@
         android:paddingRight="8dp"
         android:paddingBottom="8dp"/>
 
+
     <TextView
         android:id="@+id/tv_valor"
         android:layout_width="match_parent"
@@ -41,8 +46,6 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:paddingBottom="8dp"/>
-
-
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

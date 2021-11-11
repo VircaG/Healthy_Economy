@@ -55,7 +55,7 @@ public class GastosPorCategoriaActivity extends AppCompatActivity  implements Ad
     String item;
     Categoria categoria;
 
-    String [] categorias = {"Escolha a categoria",
+    String [] categorias = {"Escolha uma categoria",
             "Alimentação",
             "Bares e Restaurantes",
             "Casa",

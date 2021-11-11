@@ -12,12 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.healthyeconomy.CategoriaValorAdapter;
 import com.example.healthyeconomy.ConfiguracaoFirebase;
-import com.example.healthyeconomy.ContatoAdapter;
 import com.example.healthyeconomy.GastosPorCategoria;
 import com.example.healthyeconomy.GastosPorCategoriaActivity;
-import com.example.healthyeconomy.GastosPropios;
-import com.example.healthyeconomy.GastosPropiosActivity;
 import com.example.healthyeconomy.Preferencias;
 import com.example.healthyeconomy.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,7 +31,7 @@ public class GastosCategoriaFragment extends Fragment {
 
    private ListView listViewGPC;
    private ArrayAdapter adapterCategoria;
-   private ArrayList<String> gastoPorCategoria;
+   private ArrayList<GastosPorCategoria> gastoPorCategoria;
    private DatabaseReference firebase;
    private ValueEventListener valueEventListenerGastosPCategoria;
 
@@ -56,7 +54,7 @@ public class GastosCategoriaFragment extends Fragment {
 
 
         //Instânciar Objectos
-        gastoPorCategoria = new ArrayList<>();
+        gastoPorCategoria = new ArrayList<GastosPorCategoria>();
 
 
         //Inflate to layout for this fragment
@@ -74,12 +72,13 @@ public class GastosCategoriaFragment extends Fragment {
 
         //Monta listView e adapter
         listViewGPC = (ListView) view1.findViewById(R.id.lv_gastosCategoria);
-        adapterCategoria = new ArrayAdapter(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                gastoPorCategoria
-        );
+//        adapterCategoria = new ArrayAdapter(
+//                getActivity(),
+//                android.R.layout.simple_list_item_1,
+//                gastoPorCategoria
+//        );
        // adapterCategoria = new (getActivity(),gastoPorCategoria);
+        adapterCategoria = new CategoriaValorAdapter(getActivity(), gastoPorCategoria);
         listViewGPC.setAdapter(adapterCategoria);
 
         //Recuperar gastos por categoria do firebase
@@ -99,10 +98,11 @@ public class GastosCategoriaFragment extends Fragment {
 
                 //Listar gastos por categoria
                 for( DataSnapshot dados1 : snapshot.getChildren()){
-                    GastosPorCategoria gastosPorCategoria = dados1.getValue(GastosPorCategoria.class);
-                    gastoPorCategoria.add(gastosPorCategoria.getDescricaoCategoria());
-                    gastoPorCategoria.add(gastosPorCategoria.getLimiteCategoria());
-                    gastoPorCategoria.add(gastosPorCategoria.getDataCategoria());
+                    GastosPorCategoria gastosPorCategoria1 = dados1.getValue(GastosPorCategoria.class);
+                    gastoPorCategoria.add(gastosPorCategoria1);
+//                    gastoPorCategoria.add(gastosPorCategoria.getDescricaoCategoria());
+//                    gastoPorCategoria.add(gastosPorCategoria.getLimiteCategoria());
+//                    gastoPorCategoria.add(gastosPorCategoria.getDataCategoria());
                     //gastoPorCategoria.add(gastosPorCategoria.getCategoria());
                 }
                 adapterCategoria.notifyDataSetChanged();

@@ -9,15 +9,6 @@
             android:id="@+id/nav_principal"
             android:icon="@drawable/ic_m_principal"
             android:title="@string/menu_principal" />
-        <item
-            android:id="@+id/nav_perfil"
-            android:icon="@drawable/ic_m_perfil"
-            android:title="@string/menu_perfil" />
-
-        <item
-            android:id="@+id/nav_questionario"
-            android:icon="@drawable/ic_m_quest"
-            android:title="@string/menu_quest" />
 
         <item
             android:id="@+id/nav_gastosP"
@@ -28,6 +19,7 @@
             android:id="@+id/nav_gastosC"
             android:icon="@drawable/ic_m_categoria"
             android:title="@string/menu_gastoC" />
+
     </group>
 
     <item android:title="Como posso te ajudar?">

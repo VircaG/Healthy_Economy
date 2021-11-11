@@ -15,11 +15,6 @@
         app:showAsAction="never"
         />
 
-    <item android:id="@+id/item_pesquisa"
-        android:title="Pesquisar"
-        android:orderInCategory="300"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_search"/>
 
     <item android:id="@+id/item_contacto"
         android:title="Contactar"

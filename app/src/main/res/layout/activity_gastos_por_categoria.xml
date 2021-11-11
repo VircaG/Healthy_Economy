@@ -36,7 +36,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:textColor="@color/white"
+            android:textColor="#000"
             android:textAlignment="center"
             android:textSize="20sp"/>
 
@@ -58,13 +58,13 @@
             android:id="@+id/tv_limiteMensal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Adicione o limite mensal da Categoria"
+            android:text="Adicione o valor do limite mensal da Categoria"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:textColor="@color/white"
+            android:textColor="#000"
             android:textAlignment="center"
             android:textSize="20sp"/>
         <EditText
@@ -78,7 +78,7 @@
             android:layout_marginRight="24dp"
             android:ems="10"
             android:textAlignment="center"
-            android:hint="Adicione o limite mensal"
+            android:hint="Adicione o valor do limite mensal"
             android:inputType="numberDecimal" />
 
 

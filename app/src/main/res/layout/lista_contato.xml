@@ -23,11 +23,11 @@
         android:id="@+id/tv_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:textSize="14sp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:paddingBottom="8dp"/>
+        android:paddingBottom="8dp"
+        android:textColor="#000"
+        android:textSize="14sp" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

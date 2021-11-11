@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.healthyeconomy.CategoriaValorAdapter;
 import com.example.healthyeconomy.ConfiguracaoFirebase;
+import com.example.healthyeconomy.GastosAdapter;
 import com.example.healthyeconomy.GastosPropios;
 import com.example.healthyeconomy.GastosPropiosActivity;
 import com.example.healthyeconomy.Preferencias;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 public class GastosPropriosFragment extends Fragment  {
     private ListView listViewGP;
     private ArrayAdapter adapterGP;
-    private ArrayList<String> gastosProprio;
+    private ArrayList<GastosPropios> gastosProprio;
     private DatabaseReference firebase;
 
 
@@ -66,12 +68,12 @@ public class GastosPropriosFragment extends Fragment  {
 
         //Monta recyclerView e adapter
         listViewGP = (ListView) view.findViewById(R.id.lv_gastosProprios);
-        adapterGP = new ArrayAdapter(
-                getActivity(),
-               android.R.layout.simple_list_item_1,
-                gastosProprio
-
-        );
+//        adapterGP = new ArrayAdapter(
+//                getActivity(),
+//               android.R.layout.simple_list_item_1,
+//                gastosProprio
+//        );
+            adapterGP = new GastosAdapter(getActivity(), gastosProprio);
             listViewGP.setAdapter(adapterGP);
 
             //Recuperar gastos proprios do firebase
@@ -96,10 +98,11 @@ public class GastosPropriosFragment extends Fragment  {
                 for (DataSnapshot dados : snapshot.getChildren()){
 
                     GastosPropios gastosPropios = dados.getValue(GastosPropios.class);
-                    gastosProprio.add(gastosPropios.getDecricao());
-                    gastosProprio.add(gastosPropios.getData());
-                    gastosProprio.add(String.valueOf(gastosPropios.getValor()));
-                    //gastosProprio.add(gastosPropios.getCategoriaGP());
+                    gastosProprio.add(gastosPropios);
+//                    gastosProprio.add(gastosPropios.getDecricao());
+//                    gastosProprio.add(gastosPropios.getData());
+//                    gastosProprio.add(String.valueOf(gastosPropios.getValor()));
+//                    //gastosProprio.add(gastosPropios.getCategoriaGP());
 
                 }
                 adapterGP.notifyDataSetChanged();

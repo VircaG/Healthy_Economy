@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#246265"
     tools:context=".ui.informacao.InformacaoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/logo3" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Helthy economy é uma aplicação que ajuda a fazer  gestão de depesas e disponibiliza atendimento psicologico.
+ Na aplicação é possivel o utilizador inserir o limite mensal,
+ gastos proprios e gastos por categoria.Caso o utilizador sinta
+ dificuldades de fazer a gestão das despesas,na aplicação tem um chat
+  em que é possível estabelecer comunicação com outros utilizadores da
+  aplicação. Posteriomente será implementado um chatBot para que o utilizador indique as suas maiores dificuldades em fazer a gestão dos gastos para que um psicologo o oriente da melhor forma."
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 </FrameLayout>

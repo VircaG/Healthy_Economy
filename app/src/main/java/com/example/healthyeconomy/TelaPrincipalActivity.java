@@ -203,7 +203,7 @@ public class TelaPrincipalActivity extends AppCompatActivity {
                                 firebase.setValue( contato );
 
                             }else {
-                                Toast.makeText(TelaPrincipalActivity.this, "Utilizador não possui cadastro.", Toast.LENGTH_LONG)
+                                Toast.makeText(TelaPrincipalActivity.this, "Utilizador não possui registo.", Toast.LENGTH_LONG)
                                         .show();
                             }
 

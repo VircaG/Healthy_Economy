@@ -13,17 +13,14 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GastosAdapter extends ArrayAdapter<GastosPorCategoria> {
-    private ArrayList<GastosPorCategoria> gastosPorCategoria;
+public class GastosAdapter extends ArrayAdapter<GastosPropios> {
+    private ArrayList<GastosPropios> gastosProprio;
     private Context context;
 
 
-
-
-
-    public GastosAdapter(@NonNull Context c,  @NonNull ArrayList<GastosPorCategoria> objects) {
+    public GastosAdapter(@NonNull Context c,  @NonNull ArrayList<GastosPropios> objects) {
         super(c, 0, objects);
-        this.gastosPorCategoria = objects;
+        this.gastosProprio = objects;
         this.context = c;
     }
 
@@ -33,7 +30,7 @@ public class GastosAdapter extends ArrayAdapter<GastosPorCategoria> {
         View view = null;
 
         //Verifica se a lista está vazia
-        if(gastosPorCategoria != null){
+        if(gastosProprio != null){
 
             //Inicializar o objecto para montagem da view
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -47,12 +44,11 @@ public class GastosAdapter extends ArrayAdapter<GastosPorCategoria> {
             TextView descricaoGPC = (TextView) view.findViewById(R.id.tv_desGastos);
             TextView valorGPC = (TextView) view.findViewById(R.id.tv_valor);
 
-            GastosPorCategoria gastosCategoria = gastosPorCategoria.get(position);
-            dataGPC.setText(gastosCategoria.getDataCategoria());
-            categotiaGPC.setText(gastosCategoria.getCategoria());
-            descricaoGPC.setText(gastosCategoria.getDescricaoCategoria());
-            valorGPC.setText(gastosCategoria.getLimiteCategoria());
-
+            GastosPropios gastosP = gastosProprio.get(position);
+            dataGPC.setText(gastosP.getData());
+            categotiaGPC.setText(gastosP.getCategoriaGP());
+            descricaoGPC.setText(gastosP.getDecricao());
+            valorGPC.setText(gastosP.getValor());
         }
 
         return view;

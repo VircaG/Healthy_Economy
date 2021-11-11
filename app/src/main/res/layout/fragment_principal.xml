@@ -20,7 +20,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="100dp"
             android:layout_marginRight="24dp"
-            android:text="Limite Total"
+            android:text="Limite Mensal"
+            android:textColor="#000"
             android:textAlignment="center"
             android:textSize="24sp" />
 
@@ -33,7 +34,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="100dp"
             android:layout_marginRight="24dp"
-            android:drawableRight="@drawable/ic_dinheiro_50dp"
+            android:textColor="#000"
+            android:drawableRight="@drawable/ic_euro_symbol"
             android:textAlignment="center" />
 
         <ListView
